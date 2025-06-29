@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f0f0f0;
+}
+.hero {
+
+  background-image: url("./assets/images/Hero bg.png");
+  background-size: 100% 100%;
+  background-position: center;
+  background-blend-mode: overlay;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+ 
+}
+
+@media (max-width: 600px){
+    .hero {
+        background-image: url("./assets/images/mobile hero-img.png");
+         background-size: cover;
+        background-position: center;
+    }
+}
