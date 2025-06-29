@@ -1,4 +1,5 @@
 import React from 'react'
+
 import './App.css'
 
 function App() {
@@ -6,7 +7,8 @@ function App() {
 
   return (
     <>
-      <p className='text-[60px]'>Hello world</p>
+     
+     
     </>
   )
 }
