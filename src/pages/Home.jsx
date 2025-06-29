@@ -4,6 +4,8 @@ import Insurance from '../components/Insurance'
 import Report from '../components/Report'
 import Testimonials from '../components/Testimonials'
 import Companies from '../components/Companies'
+import Blog from '../components/Blog' 
+import Download from '../components/Download'
 
 const Home = () => {
   const handleChatClick = () => {
@@ -22,9 +24,9 @@ const Home = () => {
         <Retirement /> */}
         <Report />
         <Testimonials />
-        {/* <Blog />
+        <Blog />
         <Download /> 
-        <Companies /> */}
+        <Companies />
     </div>
   )
 }
