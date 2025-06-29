@@ -1,4 +1,5 @@
 import React from 'react'
+
 import './App.css'
 import chatbox from "./assets/icons/chatbox.svg"
 import Home from './pages/Home'

@@ -1,6 +1,8 @@
 import React from 'react'
 import Hero from '../components/Hero'
 import Insurance from '../components/Insurance'
+import Report from '../components/Report'
+import Testimonials from '../components/Testimonials'
 import Companies from '../components/Companies'
 
 const Home = () => {
@@ -16,13 +18,13 @@ const Home = () => {
           </button>
         </div>
         <Insurance />
-        {/* <Asset/>
-        <Retirement />
+         {/* <Asset/>
+        <Retirement /> */}
         <Report />
         <Testimonials />
-        <Blog />
-        <Download /> */}
-        <Companies />
+        {/* <Blog />
+        <Download /> 
+        <Companies /> */}
     </div>
   )
 }
