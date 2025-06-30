@@ -4,7 +4,9 @@ import Insurance from '../components/Insurance'
 import Report from '../components/Report'
 import Testimonials from '../components/Testimonials'
 import Companies from '../components/Companies'
-import chatbox from "../assets/icons/chatbox.svg"
+import Blog from '../components/Blog' 
+import Download from '../components/Download'
+import chatbox from '../assets/icons/chatbox.svg'
 
 const Home = () => {
   const handleChatClick = () => {
@@ -13,17 +15,17 @@ const Home = () => {
   return (
     <div className='py-16'>
         <Hero />
-        <div className="fixed bottom-4 right-4 z-50">
-            <img src={chatbox} alt="Chat" className="w-[70%] transition-transform transform hover:scale-110" onClick={handleChatClick} />
+        <div className="fixed bottom-4 -right-2 lg:right-4  z-50">
+            <img src={chatbox} alt="Chat" className="w-1/2 md:w-3/5 mx-auto lg:w-[70%] transition-transform transform hover:scale-110" onClick={handleChatClick} />
         </div>
         <Insurance />
          {/* <Asset/>
         <Retirement /> */}
         <Report />
         <Testimonials />
-        {/* <Blog />
+        <Blog />
         <Download /> 
-        <Companies /> */}
+        <Companies />
     </div>
   )
 }

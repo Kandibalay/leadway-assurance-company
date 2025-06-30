@@ -71,19 +71,17 @@ const Companies = () => {
     <div>
       <div className="w-full container mx-auto p-4 bg-white">
         <div className="text-center">
-          <h2 className="text-center text-[45px] font-bold my-6">
+          <h2 className="text-center text-[28px] lg:text-[36px] font-bold my-4 text-[#000000]">
             Associated Companies
           </h2>
         </div>
 
-        {/* Main Logo Display - 6 logos in a row */}
-        <div className="relative bg-white rounded-2xl p-3 mb-4 overflow-hidden">
+        <div className="relative bg-white rounded-2xl py-3 mb-4 overflow-hidden">
           {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-5">
+          {/* <div className="absolute inset-0 opacity-5">
             <div className="w-full h-full bg-white"></div>
-          </div>
+          </div> */}
 
-          {/* Logo Row - Straight Line */}
           <div className="relative z-10 flex items-center justify-between">
             {visibleLogos.map((logo, index) => (
               <div
