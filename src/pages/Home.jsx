@@ -7,6 +7,8 @@ import Companies from '../components/Companies'
 import Blog from '../components/Blog' 
 import Download from '../components/Download'
 import chatbox from '../assets/icons/chatbox.svg'
+import Asset from '../components/Asset'
+import Retirement from '../components/Retirement'
 
 const Home = () => {
   const handleChatClick = () => {
@@ -19,8 +21,8 @@ const Home = () => {
             <img src={chatbox} alt="Chat" className="w-1/2 md:w-3/5 mx-auto lg:w-[70%] transition-transform transform hover:scale-110" onClick={handleChatClick} />
         </div>
         <Insurance />
-         {/* <Asset/>
-        <Retirement /> */}
+         <Asset/>
+        <Retirement />
         <Report />
         <Testimonials />
         <Blog />
