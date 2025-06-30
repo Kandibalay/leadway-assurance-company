@@ -104,13 +104,13 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="py-16 bg-white text-black text-center overflow-hidden">
-      <h2 className="text-3xl font-bold mb-10">Testimonials</h2>
+    <section className="py-16 px-6 md:px-10 lg:px-14 bg-white text-black text-center overflow-hidden">
+      <h2 className="text-[40px] font-bold mb-10">Testimonials</h2>
 
       <div className="relative flex items-center justify-center max-w-6xl mx-auto">
         <button
           onClick={prevSlide}
-          className="absolute left-0 md:left-[-3rem] bg-orange-500 text-white p-2 rounded-full z-10 hover:bg-orange-600"
+          className="absolute left-0 bg-orange-500 text-white p-2 rounded-full z-10 hover:bg-orange-600"
         >
           <FiChevronLeft size={24} />
         </button>
@@ -128,7 +128,7 @@ const Testimonials = () => {
 
         <button
           onClick={nextSlide}
-          className="absolute right-0 md:right-[-3rem] bg-orange-500 text-white p-2 rounded-full z-10 hover:bg-orange-600"
+          className="absolute right-0 bg-orange-500 text-white p-2 rounded-full z-10 hover:bg-orange-600"
         >
           <FiChevronRight size={24} />
         </button>
