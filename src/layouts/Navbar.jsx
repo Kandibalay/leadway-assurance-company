@@ -43,37 +43,38 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white shadow fixed z-50 right-0 left-0 w-full">
-      <div className="max-w-7xl mx-auto px-4 lg:px-12 ">
-        <div className="flex justify-between h-20 items-center">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-14 ">
+        <div className="flex justify-between h-16 items-center">
           <div className="flex-shrink-0">
-            <NavLink
-              className="text-xl font-bold text-gray-600 flex items-center cursor-pointer"
-              to="home"
-            >
-              <img src={Logo} alt="" />
+            <NavLink className="cursor-pointer" to="home">
+              <img src={Logo} alt="logo" />
             </NavLink>
           </div>
           <div
             className="lg:hidden text-2xl flex items-center cursor-pointer"
             onClick={openMenuBar}
           >
-            {showMenu ? <IoCloseOutline /> : <RxHamburgerMenu />}
+            {showMenu ? (
+              <IoCloseOutline className="text-black" />
+            ) : (
+              <RxHamburgerMenu className="text-black" />
+            )}
           </div>
           <div
             className={`lg:static absolute bg-white top-16  ${
               showMenu
-                ? "block opacity-100 w-[280px] right-0 p-8 "
+                ? "block opacity-100 w-full rounded-b-lg right-0 p-4 "
                 : "hidden opacity-0 top-[100%]"
             } lg:opacity-100 lg:flex lg:items-center lg:w-auto  font-bold  z-50 gap-5`}
             ref={navRef}
           >
-            <div className="flex flex-col lg:flex-row lg:space-x-12  space-y-10  lg:space-y-0">
+            <div className="flex flex-col lg:flex-row lg:space-x-4  space-y-6  lg:space-y-0 items-center lg:items-start">
               <NavLink
                 to="home"
-                className={`px-3 py-2 mb-0 text-sm lg:text-lg font-medium cursor-pointer ${
+                className={`px-3 py-2 mb-0 text-sm lg:text-[16px] font-medium cursor-pointer ${
                   activeLink === "home"
-                    ? "text-purple-500"
-                    : "text-gray-800 hover:text-gray-500"
+                    ? "text-[#EA5B0C]"
+                    : "text-black hover:text-[#EA5B0C]"
                 }`}
                 onClick={() => {
                   handleActiveLink("home");
@@ -84,10 +85,10 @@ const Navbar = () => {
               </NavLink>
               <NavLink
                 to="insurance"
-                className={`px-3 py-2 mb-0 text-sm lg:text-lg font-medium cursor-pointer ${
+                className={`px-3 py-2 mb-0 text-sm lg:text-[16px] font-medium cursor-pointer ${
                   activeLink === "insurance"
-                    ? "text-purple-500"
-                    : "text-gray-800 hover:text-gray-500"
+                    ? "text-[#EA5B0C]"
+                    : "text-black hover:text-[#EA5B0C]"
                 }`}
                 onClick={() => {
                   handleActiveLink("insurance");
@@ -98,10 +99,10 @@ const Navbar = () => {
               </NavLink>
               <NavLink
                 to="blog"
-                className={`px-3 py-2 mb-0 text-sm lg:text-lg font-medium cursor-pointer ${
+                className={`px-3 py-2 mb-0 text-sm lg:text-[16px] font-medium cursor-pointer ${
                   activeLink === "blog"
-                    ? "text-purple-500"
-                    : "text-gray-800 hover:text-gray-500"
+                    ? "text-[#EA5B0C]"
+                    : "text-black hover:text-[#EA5B0C]"
                 }`}
                 onClick={() => {
                   handleActiveLink("blog");
@@ -111,10 +112,10 @@ const Navbar = () => {
                 Blog
               </NavLink>
               <NavLink
-                className={`px-3 py-2 mb-0 text-sm lg:text-lg font-medium cursor-pointer ${
+                className={`px-3 py-2 mb-0 text-sm lg:text-[16px] font-medium cursor-pointer ${
                   activeLink === "about"
-                    ? "text-purple-500"
-                    : "text-gray-800 hover:text-gray-500"
+                    ? "text-[#EA5B0C]"
+                    : "text-black hover:text-[#EA5B0C]"
                 }`}
                 onClick={() => {
                   handleActiveLink("about");
@@ -125,10 +126,10 @@ const Navbar = () => {
                 About
               </NavLink>
               <NavLink
-                className={`px-3 py-2 mb-0 text-sm lg:text-lg font-medium cursor-pointer ${
+                className={`px-3 py-2 mb-0 text-sm lg:text-[16px] font-medium cursor-pointer ${
                   activeLink === "contact"
-                    ? "text-purple-500"
-                    : "text-gray-800 hover:text-gray-500"
+                    ? "text-[#EA5B0C]"
+                    : "text-black hover:text-[#EA5B0C]"
                 }`}
                 onClick={() => {
                   handleActiveLink("contact");
@@ -138,53 +139,71 @@ const Navbar = () => {
               >
                 Contact us
               </NavLink>
-              <div className="block lg:hidden">
-                <NavLink
-                  className={`border  px-3 py-2 text-lg font-medium rounded-md cursor-pointer ${
-                    activeLink === "signup"
-                      ? "bg-purple-500 text-white"
-                      : "border-purple-500 text-purple-500 bg-white "
-                  }`}
-                  onClick={() => {
-                    handleActiveLink("signup");
-                    closeMenuBar();
-                  }}
-                  to="signup"
-                >
-                  Sign Up
-                </NavLink>
-                <NavLink
-                  className={`border  px-3 py-2 text-lg font-medium rounded-md cursor-pointer ${
-                    activeLink === "login"
-                      ? "bg-purple-500 text-white"
-                      : "border-purple-500 text-purple-500 bg-white "
-                  }`}
-                  onClick={() => {
-                    handleActiveLink("login");
-                    closeMenuBar();
-                  }}
-                  to="login"
-                >
-                  Log In
-                </NavLink>
+              <div className="block lg:hidden ">
+                <div className="flex flex-col gap-2">
+                  <NavLink
+                    className={`border  px-3 py-2 text-[16px] font-medium rounded-md cursor-pointer ${
+                      activeLink === "signup"
+                        ? "bg-white text-black border-[#EA5B0C] "
+                        : "border-[#EA5B0C] text-white bg-[#EA5B0C] "
+                    }`}
+                    onClick={() => {
+                      handleActiveLink("signup");
+                      closeMenuBar();
+                    }}
+                    to="signup"
+                  >
+                    Sign Up
+                  </NavLink>
+                  <NavLink
+                    className={`border  px-3 py-2 text-center text-[16px] font-medium rounded-md cursor-pointer ${
+                      activeLink === "login"
+                        ? "bg-[#EA5B0C] text-white"
+                        : "border-[#EA5B0C] text-[#EA5B0C] bg-white "
+                    }`}
+                    onClick={() => {
+                      handleActiveLink("login");
+                      closeMenuBar();
+                    }}
+                    to="login"
+                  >
+                    Log In
+                  </NavLink>
+                </div>
               </div>
             </div>
           </div>
           <div className="hidden lg:block">
-            <NavLink
-              className={`border  px-3 py-2 text-lg font-medium rounded-md cursor-pointer ${
-                activeLink === "contact"
-                  ? "bg-purple-500 text-white"
-                  : "border-purple-500 text-purple-500 bg-white "
-              }`}
-              onClick={() => {
-                handleActiveLink("contact");
-                closeMenuBar();
-              }}
-              to="contact"
-            >
-              Contact Me
-            </NavLink>
+            <div className="grid grid-cols-2 gap-4">
+              <NavLink
+                className={`border px-3 py-2 text-[16px] font-medium rounded-md cursor-pointer ${
+                  activeLink === "signup"
+                    ? "bg-white text-black border-[#EA5B0C] "
+                    : "border-[#EA5B0C] text-white bg-[#EA5B0C] "
+                }`}
+                onClick={() => {
+                  handleActiveLink("signup");
+                  closeMenuBar();
+                }}
+                to="signup"
+              >
+                Sign Up
+              </NavLink>
+              <NavLink
+                className={`border px-3 py-2 text-[16px] text-center font-medium rounded-md cursor-pointer ${
+                  activeLink === "login"
+                    ? "bg-[#EA5B0C] text-white"
+                    : "border-[#EA5B0C] text-[#EA5B0C] bg-white "
+                }`}
+                onClick={() => {
+                  handleActiveLink("login");
+                  closeMenuBar();
+                }}
+                to="login"
+              >
+                Log In
+              </NavLink>
+            </div>
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@ import AppleIcon from "../assets/Apple-icon.svg";
 
 const Download = () => {
   return (
-    <section className="py-16 px-4 -mt-15 font-Poppins">
+    <section className="py-12 px-6 md:px-10 lg:px-14 -mt-15 font-Poppins">
       <div className="max-w-6xl mx-auto px-4 md:px-6 bg-[#FFF6F2]  rounded-3xl py-20 grid md:grid-cols-2 items-center gap-10">
         {/* Left Content */}
         <div className="space-y-5 pl-2 sm:pl-6 md:pl-10">
@@ -23,7 +23,7 @@ const Download = () => {
             SEAMLESS, EASY and CONVENIENT
           </button>
 
-          <div className="flex space-x-4 pt-4">
+          <div className="flex flex-col lg:flex-row gap-4  pt-4">
             {/* Google Play */}
             <button className="flex items-center bg-black text-white px-4 py-2 rounded-lg hover:opacity-90">
               <img src={GoogleIcon} alt="Google Play" className="h-8 w-8 mr-3" />

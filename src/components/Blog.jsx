@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import BlogImage1 from "../assets/blog-image-1.png";
 import BlogImage2 from "../assets/blog-image-2.png";
 import BlogImage3 from "../assets/blog-image-3.png";
@@ -6,10 +6,10 @@ import DateIcon from "../assets/date-icon.svg";
 
 const Blog = () => {
   return (
-    <section className="py-16 px-6 bg-[#FFFFFF]">
-      <h2 className="text-center mb-10 font-poppins font-[700] text-[45px] text-[#000000]">
-  Read Our Latest News & Articles
-</h2>
+    <section className="py-12 lg:py-16 px-6 md:px-10 lg:px-14 bg-[#FFFFFF] container mx-auto">
+      <h2 className="text-center mb-10 font-poppins font-bold text-[28px] md:text-[36px] text-[#000000]">
+        Read Our Latest News & Articles
+      </h2>
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
         {[
           {
@@ -47,20 +47,22 @@ const Blog = () => {
                 alt={a.title}
                 className="w-full object-contain rounded-md hover:scale-110 transition duration-500"
               />
-              <h3 className="font-poppins font-[600] text-[20px] text-[#000000] hover:text-orange-600 transition mt-3">
+              <h3 className="w-[80%] font-semibold text-[16px] text-[#000000] hover:text-orange-600 transition mt-3">
                 {a.title}
               </h3>
 
               {/* Author & Date */}
               <div className="flex items-center font-poppins font-[400] text-[14px] text-[#000000] gap-x-4 mt-2">
-                <span>{a.author}</span>
+                <span className="font-semibold">{a.author}</span>
                 <div className="flex items-center gap-x-1 font-poppins font-[400] text-[14px] text-[#000000]">
                   <img src={DateIcon} alt="Date Icon" className="w-4 h-4" />
                   <span>{a.date}</span>
                 </div>
               </div>
 
-              <p className="font-poppins font-[400] text-[14px] text-[#000000] mt-2">{a.text}</p>
+              <p className="font-poppins font-[400] text-[14px] text-[#000000] mt-2">
+                {a.text}
+              </p>
             </div>
 
             {/* Read More Link aligned at bottom */}
