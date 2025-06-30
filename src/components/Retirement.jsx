@@ -5,14 +5,14 @@ import icons from "../assets/icons/Group 3.svg";
 const Retirement = () => {
   return (
     <div className="flex flex-col gap-[55px] py-10">
-      <div className="flex flex-col justify-center items-center gap-4">
-        <h1 className="font-bold text-[45px] text-center ">Enjoy Retirement</h1>
+      <div className="flex flex-col justify-center items-center gap-4  text-black">
+        <h1 className="font-bold text-[28px] lg:text-[36px] text-center ">Enjoy Retirement</h1>
         <p className="font-semibold text-[20px] lg:w-[70%] text-center"><span className="text-[#EC5B0C]">20+ years</span> helping Nigerians retire with confidence and peace of mind. Start your journey toward a secure and fulfilling retirement.</p>
       </div>
 
 
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 items-center md:justify-center md:items-center gap-16">
+      <div className="grid grid-cols-1 lg:grid-cols-2 items-center md:justify-center md:items-center gap-16  text-black">
       <div className="p-6">
         <img src={img1} alt="" />
       </div>
