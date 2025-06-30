@@ -1,4 +1,6 @@
 import React from 'react'
+import Asset from './components/Asset'
+import Retirement from './components/Retirement'
 import './App.css'
 
 function App() {
@@ -6,7 +8,8 @@ function App() {
 
   return (
     <>
-      <p className='text-[60px]'>Hello world</p>
+      <Asset/>
+      < Retirement/>
     </>
   )
 }

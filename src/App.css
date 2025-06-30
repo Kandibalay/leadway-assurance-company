@@ -1,0 +1,21 @@
+.asset{
+    background-image: url(./assets/images/desktop-bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.button{
+    cursor: pointer;
+}
+ .button-1{
+     cursor: pointer;
+ }
+
+
+@media (max-width:600px) {
+    .asset{
+    background-image: url(./assets/images/mobile-background.png);
+    background-size: cover;
+    background-position: center;
+    }
+}
