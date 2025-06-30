@@ -15,7 +15,7 @@ const Report = () => {
               Access detailed performance insights, strategic updates, and how
               we’re delivering long-term value to policyholders and partners.
             </p>
-            <button className="my-3 bg-[#EA5B0C] text-whitew w-3/5 lg:w-1/3 py-3 rounded-md">
+            <button className="my-3 bg-[#EA5B0C] hover:bg-orange-700 text-whitew w-3/5 lg:w-1/3 py-3 rounded-md">
               View Annual Report
             </button>
           </div>
