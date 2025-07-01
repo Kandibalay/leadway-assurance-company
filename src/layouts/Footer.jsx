@@ -1,16 +1,16 @@
 import React from "react";
-import Logo from "../assets/leadway-icon.svg";
-import FacebookIcon from "../assets/fb-icon.svg";
-import TwitterIcon from "../assets/twitter-icon.svg";
-import InstagramIcon from "../assets/instagram-icon.svg";
-import LinkedInIcon from "../assets/linkedin-icon.svg";
-import YoutubeIcon from "../assets/youtube-icon.svg";
+import Logo from "../assets/icons/Logo.svg";
+import FacebookIcon from "../assets/icons/fb-icon.svg";
+import TwitterIcon from "../assets/icons/twitter-icon.svg";
+import InstagramIcon from "../assets/icons/instagram-icon.svg";
+import LinkedInIcon from "../assets/icons/linkedin-icon.svg";
+import YoutubeIcon from "../assets/icons/youtube-icon.svg";
 
 const Footer = () => {
   return (
     <footer className="bg-black text-[#FFFFFF] py-12 px-6 md:px-10 lg:px-14 container mx-auto">
-      <div className="flex flex-col lg:flex-row  gap-10">
-        <div className="flex flex-col w-1/3 items-start">
+      <div className="flex flex-col lg:flex-row gap-10">
+        <div className="flex flex-col w-full md:w-1/3 lg:w-1/4 xl:w-1/3 items-start">
           <img src={Logo} alt="Leadway Assurance Logo" className="h-16 mb-4" />
 
           {/* Social Icons */}
@@ -23,19 +23,19 @@ const Footer = () => {
           </div>
 
           {/* Newsletter  */}
-          <div className="w-80 lg:w-[320px] -mt-2 ">
+          <div className="w-full">
             <h3 className="font-poppins font-semibold text-base mb-4">
               Subscribe to our newsletter
             </h3>
-            <form className="relative">
+            <form className="relative w-full">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="w-full lg:w-80 pl-2 py-2 bg-white text-[#000000] border border-gray-400 rounded-md placeholder:text-base lg:placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full pl-2 py-2 bg-white text-[#000000] border border-gray-400 rounded-md placeholder:text-base lg:placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
               />
               <button
                 type="submit"
-                className="absolute top-0 bottom-0 right-0 w-[120px] rounded-md bg-[#EC5B0C] text-white text-sm font-semibold transition hover:bg-orange-700"
+                className="absolute top-0 bottom-0 right-0 w-1/3  rounded-md bg-[#EC5B0C] text-white text-sm font-semibold transition hover:bg-orange-700"
               >
                 Subscribe
               </button>

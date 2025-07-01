@@ -1,9 +1,9 @@
 import React from 'react'
-import { insuredData } from '../Db'
+import { insuredData } from '../../Db'
 
 const Insurance = () => {
   return (
-    <div className='w-full container lg:w-[70%] mx-auto my-10'>
+    <div className='w-full container lg:w-[80%] xl:w-[70%] mx-auto my-10'>
         <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4'>
             {insuredData.map((item) => (
             <div key={item.id} className='bg-[#FDEFE7] shadow-lg rounded-lg p-6 flex flex-col items-start'>

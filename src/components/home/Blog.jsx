@@ -1,8 +1,8 @@
 import React from "react";
-import BlogImage1 from "../assets/blog-image-1.png";
-import BlogImage2 from "../assets/blog-image-2.png";
-import BlogImage3 from "../assets/blog-image-3.png";
-import DateIcon from "../assets/date-icon.svg";
+import BlogImage1 from "../../assets/images/blog-image-1.png";
+import BlogImage2 from "../../assets/images/blog-image-2.png";
+import BlogImage3 from "../../assets/images/blog-image-3.png";
+import DateIcon from "../../assets/icons/date-icon.svg";
 
 const Blog = () => {
   return (

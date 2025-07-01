@@ -1,11 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import logo1 from "../assets/icons/company logo1.svg";
-import logo2 from "../assets/icons/company logo2.svg";
-import logo3 from "../assets/icons/company logo3.svg";
-import logo4 from "../assets/icons/company logo4.svg";
-import logo5 from "../assets/icons/company logo6.svg";
-import logo6 from "../assets/icons/company logo7.svg";
+import logo1 from "../../assets/icons/company logo1.svg";
+import logo2 from "../../assets/icons/company logo2.svg";
+import logo3 from "../../assets/icons/company logo3.svg";
+import logo4 from "../../assets/icons/company logo4.svg";
+import logo5 from "../../assets/icons/company logo6.svg";
+import logo6 from "../../assets/icons/company logo7.svg";
 
 const Companies = () => {
   const [currentStartIndex, setCurrentStartIndex] = useState(0);
