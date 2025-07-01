@@ -7,10 +7,10 @@ body {
   background-color: #ffffff;
 }
 .asset{
-    background-image: url(./assets/images/desktop-bg.png);
+    background-image: url("./assets/images/desktop-bg.png");
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
+   
 }
 .button{
     cursor: pointer;
@@ -21,8 +21,6 @@ body {
 .hero{
   background-image: url("./assets/images/Hero bg.png");
   background-size: 100% 100%;
-  background-position: center;
-  background-blend-mode: overlay;
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
@@ -35,7 +33,7 @@ body {
 
 @media (max-width:768px) {
     .asset{
-    background-image: url(./assets/images/mobile-background.png);
+    background-image: url("./assets/images/mobile-background.png");
     background-size: cover;
     background-position: center;
 
