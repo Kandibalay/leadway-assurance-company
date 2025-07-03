@@ -1,8 +1,17 @@
 import React from 'react'
+import Leadership from '../components/about/Leadership'
+import CoreValues from '../components/about/CoreValues'
+import Download from '../components/home/Download'
+import Companies from '../components/home/Companies'
 
 const About = () => {
   return (
-    <div>About</div>
+    <div>
+      <CoreValues />
+      <Leadership />
+      <Download />
+      <Companies />
+    </div>
   )
 }
 
