@@ -89,9 +89,9 @@ const Navbar = () => {
                       </a>
                       <ul className="flex flex-col gap-3 text-[14px]">
                         <li>
-                          <a href="#" className="cursor-not-allowed">
+                          <NavLink to="/insurance/marine">
                             Marine Insurance
-                          </a>
+                          </NavLink>
                         </li>
                         <li>
                           <a href="#" className="cursor-not-allowed">
@@ -314,9 +314,9 @@ const Navbar = () => {
                           {dropDown === "business" && (
                             <ul className="pl-4 flex flex-col gap-3 text-[14px] text-left">
                               <li>
-                                <a href="#" className="cursor-not-allowed">
+                                <NavLink to="/insurance/marine" className="cursor-not-allowed">
                                   Marine Insurance
-                                </a>
+                                </NavLink>
                               </li>
                               <li>
                                 <a href="#" className="cursor-not-allowed">
