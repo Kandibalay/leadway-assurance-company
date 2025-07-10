@@ -6,7 +6,7 @@ import DateIcon from "../../assets/icons/date-icon.svg";
 
 const Blog = () => {
   return (
-    <section className="py-12 lg:py-16 px-6 md:px-10 lg:px-14 bg-[#FFFFFF] container mx-auto">
+    <section className="py-12 lg:py-8 px-6 md:px-10 lg:px-14 bg-[#FFFFFF] container mx-auto">
       <h2 className="text-center mb-10 font-poppins font-bold text-[28px] md:text-[36px] text-[#000000]">
         Read Our Latest News & Articles
       </h2>
