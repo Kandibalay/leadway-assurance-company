@@ -38,6 +38,27 @@ body {
   align-items: center;
   text-align: center;
 }
+.marine{
+  background-image: url("./assets/images/marineBg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.marine-cargo{
+  background-image: url("./assets/images/marineProductBg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 
 @media (max-width: 768px) {
   .asset {
