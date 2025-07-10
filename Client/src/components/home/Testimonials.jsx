@@ -104,7 +104,7 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="py-6 lg:py-10 px-6 md:px-10 lg:px-14 bg-white text-black text-center overflow-hidden">
+    <section className="py-6  px-6 md:px-10 lg:px-14 bg-white text-black text-center overflow-hidden">
       <h2 className="text-[28px] lg:text-[36px] font-bold mb-4 lg:mb-10">Testimonials</h2>
 
       <div className="relative flex items-center justify-center max-w-6xl mx-auto">
