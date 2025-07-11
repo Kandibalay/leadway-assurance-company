@@ -9,7 +9,7 @@ const Leadership = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {Leaders.map((leader) => (
             <div key={leader.id}
-            className="transition-transform transform hover:scale-110">
+            className="transition delay-400 duration-800 ease-in-out hover:scale-110">
               <img src={leader.image} alt={leader.name} />
               <h3 className="text-center font-semibold text-[18px]">{leader.name}</h3>
               <p className="text-center text-[14px]">{leader.position}</p>

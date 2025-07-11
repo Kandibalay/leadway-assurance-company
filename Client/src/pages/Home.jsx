@@ -15,7 +15,7 @@ const Home = () => {
     window.open("https://wa.me/2349030000000", "_blank");
   };
   return (
-    <div className="pt-16 pb-8">
+    <div className="pt-16">
       <Hero />
       <div className="relative px-6 md:px-10 lg:px-14 max-w-7xl mx-auto">
         <div className="fixed bottom-4 -right-4 lg:right-4  z-50">
