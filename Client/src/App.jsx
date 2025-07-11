@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import Home from "./pages/Home";
 import About from "./pages/About";
+import Contact from "./pages/Contact";
 import NavBar from "./layouts/Navbar";
 import {
   BrowserRouter as Router,
@@ -14,6 +15,7 @@ import Marine from "./pages/insurance/Marine";
 import MarineCargo from "./pages/insurance/MarineCargo";
 import SignUp from "./pages/auth/Signup";
 import Login from "./pages/auth/Login";
+import Blog from "./pages/Blog";
 
 function LayoutWrapper({ children }) {
   const location = useLocation();
@@ -39,6 +41,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/blog" element={<Blog />} />
+            {/* <Route path="/insurance" element={<Insurance />} /> */}
             <Route path="/insurance/marine" element={<Marine />} />
             <Route path="/marinecargo" element={<MarineCargo />} />
             <Route path="/auth/signup" element={<SignUp />} />
