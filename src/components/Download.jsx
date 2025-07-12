@@ -1,7 +1,7 @@
 import React from 'react';
 import GoogleIcon from "../assets/google-play-store-logo.svg";
 import AppleIcon from "../assets/Apple-icon.svg";
-// import AppMockup from "../assets/mobile-app-mockup.png";
+
 
 const Download = () => {
   return (
