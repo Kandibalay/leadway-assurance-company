@@ -1,24 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   background-color: #ffffff;
 }
-.asset{
-    background-image: url("./assets/images/desktop-bg.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-   
+.asset {
+  background-image: url("./assets/images/desktop-bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-.button{
-    cursor: pointer;
+.button {
+  cursor: pointer;
 }
- .button-1{
-     cursor: pointer;
- }
-.hero{
+.button-1 {
+  cursor: pointer;
+}
+.hero {
   background-image: url("./assets/images/Hero bg.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -28,24 +27,85 @@ body {
   align-items: center;
   text-align: center;
   color: white;
- 
+}
+.about {
+  background-image: url("./assets/images/aboutBg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.marine{
+  background-image: url("./assets/images/marineBg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.marine-cargo{
+  background-image: url("./assets/images/marineProductBg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-@media (max-width:768px) {
-    .asset{
+.retire {
+  background-image: url("./assets/images/retire bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  justify-content: center;
+  align-items: center;
+}
+.signup {
+  background-image: url("./assets/images/signup bg.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  justify-content: center;
+  align-items: center;
+}
+.signin {
+  background-image: url("./assets/images/login bg.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .asset {
     background-image: url("./assets/images/mobile-background.png");
     background-size: cover;
     background-position: center;
-
-    }
+  }
+}
+.marquee {
+  animation: marqueeAnim 20s linear infinite;
+  width: calc(12rem * 12); /* 12 logos (6 original + 6 clone) × 12rem width */
 }
 
+@keyframes marqueeAnim {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
 
-
-@media (max-width: 600px){
-    .hero {
-        background-image: url("./assets/images/mobile hero-img.png");
-         background-size: cover;
-        background-position: center;
-    }
+@media (max-width: 600px) {
+  .hero {
+    background-image: url("./assets/images/mobile hero-img.png");
+    background-size: cover;
+    background-position: center;
+  }
 }

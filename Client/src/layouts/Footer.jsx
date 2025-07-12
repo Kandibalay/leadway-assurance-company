@@ -8,8 +8,8 @@ import YoutubeIcon from "../assets/icons/youtube-icon.svg";
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-[#FFFFFF] py-12 px-6 md:px-10 lg:px-14 container mx-auto">
-      <div className="flex flex-col lg:flex-row gap-10">
+    <footer className="bg-black text-[#FFFFFF] py-12">
+      <div className="flex flex-col lg:flex-row gap-10 container px-6 md:px-10 lg:px-14 mx-auto">
         <div className="flex flex-col w-full md:w-1/3 lg:w-1/4 xl:w-1/3 items-start">
           <img src={Logo} alt="Leadway Assurance Logo" className="h-16 mb-4" />
 
@@ -44,7 +44,7 @@ const Footer = () => {
         </div>
 
         {/* All Links */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {/* Our Company */}
           <div>
             <h3 className="font-poppins font-semibold text-[18px] mb-4">
