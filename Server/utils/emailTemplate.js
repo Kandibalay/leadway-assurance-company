@@ -1,10 +1,10 @@
-// Reset Password Email Template
+// utils/emailTemplate.js
+
 export const generateResetEmail = (user, resetLink) => {
   return `
     <div style="max-width:600px;margin:auto;font-family:sans-serif;padding:20px;border:1px solid #ddd;border-radius:8px;">
       <div style="text-align:center;">
-        <img src="https://res.cloudinary.com/dqtppjttb/image/upload/v1751727621/Leadway_Assurance_Company_Limited_Logo_mpgwu7.png" alt="leadway assurance- Logo" style=""max-width: 50.3px; max-height: 43.92px;" margin-bottom: 20px;border-radius: 10px;">
-             alt="Leadway Logo" width="120" style="margin-bottom:20px;" />
+        <img src="https://res.cloudinary.com/dqtppjttb/image/upload/v1751727621/Leadway_Assurance_Company_Limited_Logo_mpgwu7.png" alt="Leadway Logo" width="120" style="margin-bottom:20px;" />
         <h2 style="color:#333;margin-bottom:20px;">Reset Your Password</h2>
       </div>
       <p>Hello ${user.firstName},</p>
@@ -21,13 +21,11 @@ export const generateResetEmail = (user, resetLink) => {
   `;
 };
 
-// Welcome Email Template
 export const generateWelcomeEmail = (user) => {
   return `
     <div style="max-width:600px;margin:auto;font-family:sans-serif;padding:20px;border:1px solid #ddd;border-radius:8px;">
       <div style="text-align:center;">
-        <img src="https://res.cloudinary.com/dqtppjttb/image/upload/v1751727621/Leadway_Assurance_Company_Limited_Logo_mpgwu7.png" alt="leadway assurance- Logo" style=""max-width: 50.3px; max-height: 43.92px;" margin-bottom: 20px;border-radius: 10px;">
-             alt="Leadway Logo" width="120" style="margin-bottom:20px;" />
+        <img src="https://res.cloudinary.com/dqtppjttb/image/upload/v1751727621/Leadway_Assurance_Company_Limited_Logo_mpgwu7.png" alt="Leadway Logo" width="120" style="margin-bottom:20px;" />
         <h2 style="color:#004b8d;">Welcome to Leadway Assurance, ${user.firstName}!</h2>
       </div>
       <p>We're excited to have you onboard.</p>
