@@ -1,7 +1,11 @@
 import USER from "../models/userModel.js";
 import crypto from "crypto";
 import sendEmail from "../utils/sendEmail.js";
-import { generateResetEmail, generateWelcomeEmail } from "../utils/emailTemplate.js";
+import {
+  generateResetEmail,
+  generateWelcomeEmail,
+  generateVerifyEmail,
+} from "../utils/emailTemplate.js";
 
 // SIGN UP
 export const signUp = async (req, res) => {
@@ -9,32 +13,64 @@ export const signUp = async (req, res) => {
     const { firstName, lastName, email, password } = req.body;
 
     const existingUser = await USER.findOne({ email });
-    if (existingUser) return res.status(400).json({ message: "Email already registered" });
+    if (existingUser)
+      return res.status(400).json({ message: "Email already registered" });
 
     const newUser = await USER.create({ firstName, lastName, email, password });
-    const token = newUser.generateToken();
 
-    // Send welcome email
-    const welcomeEmail = generateWelcomeEmail(newUser);
+    // Generate verification token
+    const verifyToken = newUser.getVerifyEmailToken();
+    await newUser.save();
+
+    const verifyUrl = `http://localhost:5173/verify-email/${verifyToken}`;
+    const verifyEmailHTML = generateVerifyEmail(newUser, verifyUrl);
+
     await sendEmail({
       to: newUser.email,
+      subject: "Verify Your Email",
+      html: verifyEmailHTML,
+    });
+
+    res.status(201).json({
+      message: "Signup successful. Please check your email to verify your account.",
+    });
+  } catch (err) {
+    console.error("Sign up error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// VERIFY EMAIL
+export const verifyEmail = async (req, res) => {
+  try {
+    const { token } = req.params;
+    const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+
+    const user = await USER.findOne({
+      verifyEmailToken: hashedToken,
+      verifyEmailTokenExpire: { $gt: Date.now() },
+    });
+
+    if (!user)
+      return res.status(400).json({ message: "Invalid or expired verification token" });
+
+    user.isVerified = true;
+    user.verifyEmailToken = undefined;
+    user.verifyEmailTokenExpire = undefined;
+    await user.save();
+
+    // Send welcome email after verification
+    const welcomeEmail = generateWelcomeEmail(user);
+    await sendEmail({
+      to: user.email,
       subject: "Welcome to Leadway Assurance",
       html: welcomeEmail,
     });
 
-    res.status(201).json({
-      message: "Sign up successful",
-      token,
-      user: {
-        id: newUser._id,
-        firstName: newUser.firstName,
-        lastName: newUser.lastName,
-        email: newUser.email,
-        role: newUser.role,
-      },
-    });
+    // Redirect to frontend confirmation page
+    res.redirect("http://localhost:5173/email-verified");
   } catch (err) {
-    console.error("Sign up error:", err);
+    console.error("Email verify error:", err);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -45,10 +81,15 @@ export const signIn = async (req, res) => {
     const { email, password } = req.body;
 
     const user = await USER.findOne({ email });
-    if (!user) return res.status(400).json({ message: "Invalid credentials" });
+    if (!user)
+      return res.status(400).json({ message: "Invalid credentials" });
+
+    if (!user.isVerified)
+      return res.status(403).json({ message: "Please verify your email before logging in." });
 
     const isMatch = await user.comparePassword(password);
-    if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
+    if (!isMatch)
+      return res.status(400).json({ message: "Invalid credentials" });
 
     const token = user.generateToken();
 
@@ -75,7 +116,8 @@ export const forgotPassword = async (req, res) => {
     const { email } = req.body;
 
     const user = await USER.findOne({ email });
-    if (!user) return res.status(404).json({ message: "User not found" });
+    if (!user)
+      return res.status(404).json({ message: "User not found" });
 
     const resetToken = user.getResetPasswordToken();
     await user.save();
@@ -109,7 +151,8 @@ export const resetPassword = async (req, res) => {
       resetPasswordExpire: { $gt: Date.now() },
     });
 
-    if (!user) return res.status(400).json({ message: "Invalid or expired token" });
+    if (!user)
+      return res.status(400).json({ message: "Invalid or expired token" });
 
     user.password = newPassword;
     user.resetPasswordToken = undefined;
