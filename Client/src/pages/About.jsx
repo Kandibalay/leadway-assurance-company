@@ -6,18 +6,20 @@ import Leadership from "../components/about/Leadership";
 import CoreValues from "../components/about/CoreValues";
 import Download from "../components/home/Download";
 import Companies from "../components/home/Companies";
+import FAQ from "../components/about/FAQ"
 
 const About = () => {
   return (
-    <>
+    <main className="space-y-16">
       <Hero />
       <Info />
       <Why />
       <CoreValues />
+      <FAQ />
       <Leadership />
       <Download />
       <Companies />
-    </>
+    </main>
   );
 };
 
