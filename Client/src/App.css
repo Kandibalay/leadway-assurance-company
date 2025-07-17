@@ -29,7 +29,27 @@ body {
   color: white;
 }
 .about {
-  background-image: url("./assets/images/aboutBg.png");
+  background-image: url("./assets/images/about bgg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.marine{
+  background-image: url("./assets/images/marineBg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.marine-cargo{
+  background-image: url("./assets/images/marineProductBg.png");
   background-size: cover;
   background-repeat: no-repeat;
   display: flex;
@@ -39,11 +59,46 @@ body {
   text-align: center;
 }
 
+.retire {
+  background-image: url("./assets/images/retire bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  justify-content: center;
+  align-items: center;
+}
+.signup {
+  background-image: url("./assets/images/signup bg.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  justify-content: center;
+  align-items: center;
+}
+.signin {
+  background-image: url("./assets/images/login bg.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (max-width: 768px) {
   .asset {
     background-image: url("./assets/images/mobile-background.png");
     background-size: cover;
     background-position: center;
+  }
+}
+.marquee {
+  animation: marqueeAnim 20s linear infinite;
+  width: calc(12rem * 12); /* 12 logos (6 original + 6 clone) × 12rem width */
+}
+
+@keyframes marqueeAnim {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
 

@@ -4,7 +4,7 @@ import icons from "../../assets/icons/Group 3.svg";
 
 const Retirement = () => {
   return (
-    <div className="flex flex-col gap-[55px] py-10 container mx-auto px-6 md:px-10 lg:px-14">
+    <div className="flex flex-col gap-[55px] py-10 container mx-auto px-6 md:px-10 lg:px-14 retire">
       <div className="flex flex-col justify-center items-center gap-4  text-black">
         <h1 className="font-bold text-[28px] lg:text-[36px] text-center ">
           Enjoy Retirement
@@ -65,8 +65,8 @@ const Retirement = () => {
               </p>
             </div>
           </div>
-          <div className="flex justify-center lg:justify-start">
-            <button className="text-white bg-orange-600 rounded-lg w-63 py-3 text-base lg:text-[18px] font-semibold button-1">
+          <div className="flex justify-center md:justify-start">
+            <button className="text-white bg-[#EA5B0C] hover:bg-orange-700 rounded-lg w-[85%] md:w-[60%] py-3 text-[14px] lg:text-base font-semibold button-1">
               Start Your Retirement Plans
             </button>
           </div>
