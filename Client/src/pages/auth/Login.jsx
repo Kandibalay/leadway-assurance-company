@@ -31,15 +31,15 @@ const Login = () => {
         reset();
       };
   return (
-      <div className="signin w-full h-full flex items-center justify-center bg-[#FFF6F2]">
+      <div className="signin w-full min-h-screen h-full flex items-center justify-center bg-[#FFF6F2]">
           <form
-            className="w-[90%] max-w-3xl bg-white my-10 p-6 rounded-lg"
+            className="w-[90%] max-w-lg bg-white my-6 py-6 px-6 md:py-12 md:px-16 rounded-3xl"
             onSubmit={handleSubmit(onSubmit)}
           >
             <NavLink to="/" className="flex justify-center mb-6">
               <img src={Logo} alt="Logo" />
             </NavLink>
-            <div className="flex flex-col w-full max-w-sm  mx-auto items-center justify-center">
+            <div className="flex flex-col w-full max-w-lg mx-auto items-center justify-center">
               <div className="w-full">
                 <h1 className="text-xl font-semibold text-left text-black my-4">
                   Sign in
@@ -103,11 +103,11 @@ const Login = () => {
                     </span>
                   )}
                 </div>
-                <div className='flex items-center justify-between mb-1'>
+                <div className='flex items-center justify-between mb-1 text-white bg-wite'>
                    <div className='flex items-center'>
                     <input {...register("remember", { required: true })}
-                    className="w-3 lg:w-4 cursor-pointer h-3 lg:h-4 accent-[#EA5B0C] bg-white" 
-                    type="checkbox" name="remember" id="remember" /> 
+                    className="w-3 lg:w-4 cursor-pointer h-3 lg:h-4 text-white bg-white" 
+                    type='checkbox' name="remember" id="remember" /> 
                     <label htmlFor="remember" className="ml-2 text-[12px] lg:text-[14px] text-[#222222]">Remember me
                     </label>
                     {errors.remember && (
@@ -146,9 +146,9 @@ const Login = () => {
                 <div className="text-center mt-4">
                     <p className="text-[#969696] text-[12px] mt-4">
                         Don’t have an account??{" "}
-                        <a href="/auth/login" className="text-[#EA5B0C] font-semibold">
+                        <NavLink to="/auth/signup" className="text-[#EA5B0C] font-semibold">
                         Sign Up
-                        </a>
+                        </NavLink>
                     </p>
                 </div>
               </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import img from '../../assets/icons/Fair.svg'
 import img2 from '../../assets/icons/Trust.svg'
-import img3 from '../../assets/icons/industry.svg'
+import img3 from '../../assets/icons/recognized.svg'
 import img4 from '../../assets/icons/marketing.svg'
 import img5 from '../../assets/icons/innovative.svg'
 

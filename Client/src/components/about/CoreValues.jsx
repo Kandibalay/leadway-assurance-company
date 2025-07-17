@@ -3,7 +3,7 @@ import { CoreValuesData } from "../../Db";
 
 const CoreValues = () => {
   return (
-    <div className="text-[#5A5A5A] px-6 mx:px-10 lg:px-14 py-10 lg:py-2 container mx-auto">
+    <div className="text-[#5A5A5A] px-6 md:px-10 lg:px-14 py-10 lg:py-2 container mx-auto">
       <h2 className="text-[28px] lg:text-[36px] text-black font-bold text-center mb-4">
         Our Core Values
       </h2>

@@ -16,6 +16,7 @@ import MarineCargo from "./pages/insurance/MarineCargo";
 import SignUp from "./pages/auth/Signup";
 import Login from "./pages/auth/Login";
 import Blog from "./pages/Blog";
+import CardCarousel from "./pages/Carousel";
 
 function LayoutWrapper({ children }) {
   const location = useLocation();
@@ -43,6 +44,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
+
             {/* <Route path="/insurance" element={<Insurance />} /> */}
             <Route path="/insurance/marine" element={<Marine />} />
             <Route path="/insurance/marinecargo" element={<MarineCargo />} />

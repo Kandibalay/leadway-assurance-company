@@ -7,9 +7,9 @@ import img4 from "../../assets/images/img-5.svg";
 import img5 from "../../assets/icons/starIcon.svg";
 const Info = () => {
   return (
-    <div className=" container grid grid-cols-1 lg:grid-cols-2 gap-8 items-center justify-between py-8 lg:py-2 mx-auto px-6 md:px-10 lg:px-14  text-black">
+    <div className=" container grid grid-cols-1 lg:grid-cols-2 gap-8 items-center md:justify-center lg:justify-between pt-8 pb-8 lg:pt-10 lg:pb-2 mx-auto px-6 md:px-10 lg:px-14  text-black">
       <div className="flex flex-col gap-3 items-center lg:items-start justify-center">
-        <h1 className="font-extrabold text-[28px] lg:text-[36px] text-center lg:text-left ">
+        <h1 className="font-extrabold text-[28px] lg:text-[32px] xl:text-[36px] text-center lg:text-left ">
           About Leadway Assurance
         </h1>
         <p className="font-medium  mt-3 text-left sm:text-center lg:text-left ">
@@ -20,7 +20,7 @@ const Info = () => {
           forefront as an insurer of repute.
         </p>
 
-        <div className="flex items-center gap-4 justify-center mt-4">
+        <div className="w-full flex items-start gap-4 justify-start md:justify-center lg:justify-start mt-4">
           <div>
             <div className="flex justify-center">
               <img src={img4} alt="" />
@@ -47,8 +47,8 @@ const Info = () => {
         </div>
       </div>
 
-      <div className="w-full">
-        <img src={abt} alt="" />
+      <div className="w-full ">
+        <img src={abt} alt="" className="md:mx-auto"/>
       </div>
     </div>
   );
