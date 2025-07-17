@@ -1,174 +1,167 @@
 import USER from "../models/userModel.js";
-import jwt from "jsonwebtoken";
 import crypto from "crypto";
-import { sendForgotPasswordMail } from "../emails/emailHandlers.js";
+import sendEmail from "../utils/sendEmail.js";
+import {
+  generateResetEmail,
+  generateWelcomeEmail,
+  generateVerifyEmail,
+} from "../utils/emailTemplate.js";
 
-// sign up
-
+// SIGN UP
 export const signUp = async (req, res) => {
-  const { email, password, firstName, lastName, cPassword } = req.body;
-  if (!email || !password || !firstName || !lastName || !cPassword) {
-    res.status(400).json({
-      success: false,
-      errMsg: "all fields are required for registration",
+  try {
+    const { firstName, lastName, email, password } = req.body;
+
+    const existingUser = await USER.findOne({ email });
+    if (existingUser)
+      return res.status(400).json({ message: "Email already registered" });
+
+    const newUser = await USER.create({ firstName, lastName, email, password });
+
+    // Generate verification token
+    const verifyToken = newUser.getVerifyEmailToken();
+    await newUser.save();
+
+    const verifyUrl = `http://localhost:5173/verify-email/${verifyToken}`;
+    const verifyEmailHTML = generateVerifyEmail(newUser, verifyUrl);
+
+    await sendEmail({
+      to: newUser.email,
+      subject: "Verify Your Email",
+      html: verifyEmailHTML,
     });
-    return;
-  }
 
-  if (password !== cPassword) {
-    res.status(400).json({ success: false, errMsg: "password do not match" });
-    return;
-  }
-  
-  if (password.length < 8) {
-    res
-    .status(400)
-    .json({ success: false, errMsg: "min password length must be 8 chrs" });
-    return;
-  }
-
-  try {
-    const existingEmail = await USER.findOne({ email });
-    if (existingEmail) {
-      res.status(400).json({ success: false, errMsg: "Email already exists" });
-      return;
-    }
-    
-    const user = await USER.create({ ...req.body });
-    res
-    .status(201)
-    .json({ success: true, message: "registration successful", user });
-  } catch (error) {
-    res.status(500).json(error.message);
+    res.status(201).json({
+      message: "Signup successful. Please check your email to verify your account.",
+    });
+  } catch (err) {
+    console.error("Sign up error:", err);
+    res.status(500).json({ message: "Server error" });
   }
 };
 
-// sign in
+// VERIFY EMAIL
+export const verifyEmail = async (req, res) => {
+  try {
+    const { token } = req.params;
+    const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+
+    const user = await USER.findOne({
+      verifyEmailToken: hashedToken,
+      verifyEmailTokenExpire: { $gt: Date.now() },
+    });
+
+    if (!user)
+      return res.status(400).json({ message: "Invalid or expired verification token" });
+
+    user.isVerified = true;
+    user.verifyEmailToken = undefined;
+    user.verifyEmailTokenExpire = undefined;
+    await user.save();
+
+    // Send welcome email after verification
+    const welcomeEmail = generateWelcomeEmail(user);
+    await sendEmail({
+      to: user.email,
+      subject: "Welcome to Leadway Assurance",
+      html: welcomeEmail,
+    });
+
+    // Redirect to frontend confirmation page
+    res.redirect("http://localhost:5173/email-verified");
+  } catch (err) {
+    console.error("Email verify error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// SIGN IN
 export const signIn = async (req, res) => {
-  const { email, password } = req.body;
   try {
-    if (!email || !password) {
-     return  res
-        .status(400)
-        .json({ success: false, errMsg: "all fields are required to sign in" });
-     
-    }
-    // finding a registered email address
-    const user = await USER.findOne({ email });
-    if (!user) {
-      return res.status(401).json({ success: false, errMsg: "user not found" });
-     
-    }
+    const { email, password } = req.body;
 
-    // comparing password and validating password
+    const user = await USER.findOne({ email });
+    if (!user)
+      return res.status(400).json({ message: "Invalid credentials" });
+
+    if (!user.isVerified)
+      return res.status(403).json({ message: "Please verify your email before logging in." });
+
     const isMatch = await user.comparePassword(password);
-    if (!isMatch) {
-       return res
-        .status(401)
-        .json({ success: false, errMsg: "Email or password is incorrect" });
-       
-    }
-    // generating token
-    const token = await user.generateToken();
-    if (token) {
-  return res.status(200).json({
-        success: true,
-        message: "signed in successfully",
-        user: {
-          role: user.role,
-          firstName: user.firstName,
-          _id: user._id,
-          token,
-        },
-      });
-    
-    }
-  } catch (error) {
-    res.status(500).json(error.message);
+    if (!isMatch)
+      return res.status(400).json({ message: "Invalid credentials" });
+
+    const token = user.generateToken();
+
+    res.status(200).json({
+      message: "Sign in successful",
+      token,
+      user: {
+        id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        role: user.role,
+      },
+    });
+  } catch (err) {
+    console.error("Sign in error:", err);
+    res.status(500).json({ message: "Server error" });
   }
 };
 
-// forgot password
+// FORGOT PASSWORD
 export const forgotPassword = async (req, res) => {
-  const { email } = req.body;
   try {
-    if (!email) {
-      res.status(400).json({ success: false, errMsg: "email is required" });
-      return;
-    }
+    const { email } = req.body;
 
     const user = await USER.findOne({ email });
-    if (!user) {
-      res.status(404).json({ success: false, errMsg: "email not found" });
-      return;
-    }
+    if (!user)
+      return res.status(404).json({ message: "User not found" });
 
     const resetToken = user.getResetPasswordToken();
     await user.save();
-    res.status(201).json({ success: true, message: "mail sent" });
-    const resetUrl = process.env.CLIENT_URL_RESET + resetToken;
-    try {
-      await sendForgotPasswordMail({
-        to: user.email,
-        firstName: user.firstName,
-        resetUrl,
-      });
-    } catch (error) {
-      user.resetPasswordToken = undefined;
-      user.resetPasswordExpire = undefined;
-      await user.save();
-      return res.status(500).json({errMsg:"Email could not be sent", error})
-    }
-  } catch (error) {
-    return res.status(500).json(error.message);
+
+    const resetUrl = `http://localhost:5000/api/auth/reset-password/${resetToken}`;
+    const emailHTML = generateResetEmail(user, resetUrl);
+
+    await sendEmail({
+      to: user.email,
+      subject: "Leadway Password Reset",
+      html: emailHTML,
+    });
+
+    res.json({ message: "Reset link sent to your email" });
+  } catch (err) {
+    console.error("Forgot password error:", err);
+    res.status(500).json({ message: "Server error" });
   }
 };
 
-// reset password ftn
-export const resetPassword = async (req,res)=>{
-  const resetPasswordToken = crypto.createHash("sha256").update(req.params.resetToken).digest("hex");
+// RESET PASSWORD
+export const resetPassword = async (req, res) => {
   try {
+    const { token } = req.params;
+    const { newPassword } = req.body;
+
+    const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+
     const user = await USER.findOne({
-      resetPasswordToken,
-      resetPasswordExpire :{$gt:Date.now()}
-    })
-    if(!user){
-      res.status(400).json({status:false, errMsg:"invalid reset token"});
-      return;
-    }
-    user.password = req.body.password;
+      resetPasswordToken: hashedToken,
+      resetPasswordExpire: { $gt: Date.now() },
+    });
+
+    if (!user)
+      return res.status(400).json({ message: "Invalid or expired token" });
+
+    user.password = newPassword;
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
     await user.save();
-    res.status(201).json({success:true,message:"Password Reset successful"})
-  } catch (error) {
-    res.status(500).json(error.message);
 
-  }
-}
-
-// isLoggedIn ftn
-export const isLoggedIn = async (req, res) => {
-  try {
-    const authHeader = req.headers.authorization;
-    if (!authHeader?.startsWith("Bearer ")) {
-      return res.status(401).json({ success: false, errMsg: "Unauthorized" });
-    }
-    const token = authHeader.split(" ")[1];
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    const user = await USER.findById(decoded.userId).select("firstName role email");
-
-    if (!user) {
-      return res.status(404).json({ success: false, errMsg: "User not found" });
-    }
-
-    res.status(200).json({
-      success: true,
-      user, 
-    });
-  } catch (error) {
-    // console.error("isLoggedIn error:", error);
-    res.status(401).json({ success: false, errMsg: "Invalid token" });
+    res.json({ message: "Password reset successful" });
+  } catch (err) {
+    console.error("Reset password error:", err);
+    res.status(500).json({ message: "Server error" });
   }
 };
