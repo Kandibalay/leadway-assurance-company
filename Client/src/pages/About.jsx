@@ -6,7 +6,7 @@ import Leadership from "../components/about/Leadership";
 import CoreValues from "../components/about/CoreValues";
 import Download from "../components/home/Download";
 import Companies from "../components/home/Companies";
-import FAQ from "../components/about/faq";
+import FAQ from "../components/about/FAQ"
 
 const About = () => {
   return (
