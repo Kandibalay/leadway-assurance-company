@@ -43,9 +43,10 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
+            {/* Uncomment the following line if you have an Insurance component */}
             {/* <Route path="/insurance" element={<Insurance />} /> */}
             <Route path="/insurance/marine" element={<Marine />} />
-            <Route path="/marinecargo" element={<MarineCargo />} />
+            {/* <Route path="/marinecargo" element={<MarineCargo />} /> */}
             <Route path="/auth/signup" element={<SignUp />} />
             <Route path="/auth/login" element={<Login />} />
           </Routes>

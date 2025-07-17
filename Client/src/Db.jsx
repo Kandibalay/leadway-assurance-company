@@ -2,6 +2,7 @@ import img1 from "./assets/icons/personal insurance.svg";
 import img2 from "./assets/icons/business insurance.svg";
 import img3 from "./assets/icons/car insurance.svg";
 
+
 export const insuredData = [
   {
     id: 1,
@@ -22,6 +23,8 @@ export const insuredData = [
     image: img3,
   },
 ];
+
+
 
 import img4 from "./assets/images/Chairman.png";
 import img5 from "./assets/images/ED.png";
@@ -250,3 +253,28 @@ export const newsRelease = [
       "Friday, March 31, 2023 – Lagos, Nigeria: Leadway becomes the first Nigerian company to cross 3-digit billion mark with Total premium collection of N104.4...",
   },
 ];
+
+export const faqs = [
+  {id:1,
+    question: "How do I file a claim?",
+    answer:
+      "To file a claim, please visit our website or contact our customer service team for assistance.",
+  },
+  {
+    id:2,
+    question: "Can I buy insurance online?",
+    answer:
+      "Yes, you can purchase insurance policies directly through our website for your convenience.",
+  },
+  {id:3,
+    question: "Can I insure goods in transit within Nigeria?",
+    answer:
+      "Yes, we offer Goods in Transit insurance to protect your cargo while being transported within Nigeria.",
+  },
+  {
+    id:4,
+    question: "What types of insurance does Leadway offer?",
+    answer:
+      "Leadway offers a wide range of insurance products, including personal, business, and auto insurance.",
+  },  
+]
