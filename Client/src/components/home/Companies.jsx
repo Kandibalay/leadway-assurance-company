@@ -22,7 +22,7 @@ const Companies = () => {
 
 
   return (
-    <div className="bg-white flex flex-col items-center justify-center">
+    <div className="bg-white flex flex-col items-center justify-center pb-12">
       <h1 className="w-full text-black text-center font-bold text-[28px] lg:text-[36px] my-6">
         Associated Companies
       </h1>

@@ -7,7 +7,7 @@ const Contact = () => {
       <Hero title="Contact Us" img="contact.png" text="Home >" page="Contact" />
 
       {/* Form & Contact Info */}
-      <div className="flex flex-col md:flex-row justify-center items-start gap-8 px-4 md:px-10 lg:px-16 py-12">
+      <div className="flex flex-col md:flex-row justify-center items-start gap-8 px-6 md:px-10 lg:px-14 py-12">
         {/* Contact Form */}
         <form className="w-full md:w-1/2 bg-gray-100 p-6 rounded-lg shadow-md space-y-4">
           <div>
@@ -17,7 +17,7 @@ const Contact = () => {
             <input
               type="text"
               placeholder="Full Name"
-              className="w-full p-2 border border-gray-300 rounded text-gray-700"
+              className="w-full p-2 border border-gray-300 rounded text-gray-700 outline-none text-[14px]"
             />
           </div>
 
@@ -28,7 +28,7 @@ const Contact = () => {
             <textarea
               rows="4"
               placeholder="Tell us how we can help"
-              className="w-full p-2 border border-gray-300 rounded text-gray-700"
+              className="w-full p-2 border border-gray-300 rounded text-gray-700 outline-none text-[14px]"
             />
           </div>
 
@@ -65,7 +65,7 @@ const Contact = () => {
       </div>
 
       {/* Google Map */}
-      <div className="px-4 md:px-10 lg:px-16 pb-12">
+      <div className="px-6 md:px-10 lg:px-14 pb-12">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126831.34349359245!2d3.313149553046444!3d6.548376245325967!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8d76b27139fb%3A0x2d36fc0f0ec9a2fa!2sLagos!5e0!3m2!1sen!2sng!4v1685647909723!5m2!1sen!2sng"
           width="100%"
