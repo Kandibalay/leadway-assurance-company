@@ -1,32 +1,22 @@
 import mongoose from "mongoose";
-import validator from "validator";
 
 const contactSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "Name is required"],
-    trim: true,
+    required: true,
+    trim: true
   },
   email: {
     type: String,
-    required: [true, "Email address is required"],
-    trim: true,
-    lowercase: true,
-    validate: {
-      validator: validator.isEmail,
-      message: "Please provide a valid email address",
-    },
+    required: true,
+    trim: true
   },
   message: {
     type: String,
-    required: [true, "Message is required"],
-    trim: true,
-  },
-  subject: {
-    type: String,
-    trim: true,
+    required: true,
+    trim: true
   }
 }, { timestamps: true });
 
-const CONTACT = mongoose.model("contact", contactSchema);
-export default CONTACT;
+const Contact = mongoose.model("Contact", contactSchema);
+export default Contact;
