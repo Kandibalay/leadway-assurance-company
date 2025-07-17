@@ -19,24 +19,24 @@ const Download = () => {
             <span className="block">Manage your Policies, file claims <br /> and get quote in one place</span>
           </p>
 
-          <button className="bg-[#E6C2AA] text-[14px] lg:text-[18px] text-black w-full py-2 font-semibold rounded-md hover:bg-[#debda6]">
+          <button className="bg-[#E6C2AA] max-w-[350px] text-[14px] lg:text-[18px] text-black w-full py-2 font-semibold rounded-md hover:bg-[#debda6]">
             SEAMLESS, EASY and CONVENIENT
           </button>
 
-          <div className="flex flex-col md:flex-row gap-4  pt-4">
+          <div className="flex flex-col md:flex-row gap-4 lg:max-w-[330px] pt-4">
             {/* Google Play */}
-            <button className="w-full md:w-1/2 flex items-center bg-black text-white px-2 lg:px-4 py-2 rounded-lg hover:opacity-90">
-              <img src={GoogleIcon} alt="Google Play" className="h-8 w-8 mr-3 md:mr-0  lg:mr-3" />
-              <div className="text-left leading-tight">
+            <button className="w-full md:w-1/2 flex items-center bg-black text-white px-2 lg:px-2 py-2 rounded-lg hover:opacity-90">
+              <img src={GoogleIcon} alt="Google Play" className="h-8 w-8 mr-3 md:mr-1  lg:mr-2" />
+              <div className="text-left w-full leading-tight">
                 <span className="block text-xs md:text-[10px] lg:text-xs">Get it on</span>
                 <span className="block  text-sm md:text-[10px] lg:text-sm font-semibold">Google Play</span>
               </div>
             </button>
 
             {/* Apple Store */}
-            <button className="w-full md:w-1/2 flex items-center bg-black text-white px-2 lg:px-4 py-2 rounded-lg hover:opacity-90">
-              <img src={AppleIcon} alt="App Store" className="h-8 w-8 mr-3 md:mr-0 lg:mr-3" />
-              <div className="text-left leading-tight">
+            <button className="w-full md:w-1/2 flex items-center bg-black text-white px-2 lg:px-2 py-2 rounded-lg hover:opacity-90">
+              <img src={AppleIcon} alt="App Store" className="h-8 w-8 mr-3 md:mr-1 lg:mr-2" />
+              <div className="text-left w-full leading-tight">
                 <span className="block text-xs md:text-[10px] lg:text-xs">Download on the</span>
                 <span className="block text-sm md:text-[10px] lg:text-sm font-semibold">App Store</span>
               </div>

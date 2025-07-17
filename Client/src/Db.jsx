@@ -72,10 +72,10 @@ export const Leaders = [
   },
 ];
 
-import img10 from "./assets/icons/Integrity icon.svg";
+import img10 from "./assets/icons/integrity 2 icon.svg";
 import img11 from "./assets/icons/services icon.svg";
 import img12 from "./assets/icons/customer focus icon.svg";
-import img13 from "./assets/icons/openess icon.svg";
+import img13 from "./assets/icons/openess 2 icon.svg";
 import img14 from "./assets/icons/respectful icon.svg";
 import img15 from "./assets/icons/excellence icon.svg";
 
