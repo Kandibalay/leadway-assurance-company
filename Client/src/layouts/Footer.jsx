@@ -1,25 +1,25 @@
 import React from "react";
-import Logo from "../assets/icons/Logo.svg";
-import FacebookIcon from "../assets/icons/fb-icon.svg";
-import TwitterIcon from "../assets/icons/twitter-icon.svg";
-import InstagramIcon from "../assets/icons/instagram-icon.svg";
-import LinkedInIcon from "../assets/icons/linkedin-icon.svg";
-import YoutubeIcon from "../assets/icons/youtube-icon.svg";
+import Logo from "../assets/icons/Footer logo.svg";
+import FacebookIcon from "../assets/icons/facebook 2.svg";
+import TwitterIcon from "../assets/icons/twitter 2.svg";
+import InstagramIcon from "../assets/icons/insta 2.svg";
+import LinkedInIcon from "../assets/icons/linkedin 2.svg";
+import YoutubeIcon from "../assets/icons/youtube 2.svg";
 
 const Footer = () => {
   return (
     <footer className="bg-black text-[#FFFFFF] py-12">
       <div className="flex flex-col lg:flex-row gap-10 container px-6 md:px-10 lg:px-14 mx-auto">
-        <div className="flex flex-col w-full md:w-1/3 lg:w-1/4 xl:w-1/3 items-start">
+        <div className="flex flex-col w-full md:w-1/3 lg:w-2/5 xl:w-2/5 items-start">
           <img src={Logo} alt="Leadway Assurance Logo" className="h-16 mb-4" />
 
           {/* Social Icons */}
-          <div className="flex space-x-4 -mt-2 mb-6">
-            <img src={FacebookIcon} alt="Facebook" className="h-5 w-5" />
-            <img src={TwitterIcon} alt="Twitter" className="h-5 w-5" />
-            <img src={InstagramIcon} alt="Instagram" className="h-5 w-5" />
+          <div className="flex items-center justify-center space-x-3 -mt-2 mb-6">
+            <img src={FacebookIcon} alt="Facebook" className="h-4 w-4" />
+            <img src={InstagramIcon} alt="Instagram" className="h-4 w-4" />
+            <img src={TwitterIcon} alt="Twitter" className="h-4 w-4" />
             <img src={YoutubeIcon} alt="YouTube" className="h-5 w-5" />
-            <img src={LinkedInIcon} alt="LinkedIn" className="h-5 w-5" />
+            <img src={LinkedInIcon} alt="LinkedIn" className="h-4 w-4" />
           </div>
 
           {/* Newsletter  */}

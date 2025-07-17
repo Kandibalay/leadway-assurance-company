@@ -1,9 +1,10 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 export default function Hero({ title, img, text, page }) {
   return (
     <section
-      className="w-full relative h-[200px] md:h-[480px] px-4 text-white text-center bg-cover bg-center flex items-center justify-center"
+      className="w-full relative h-[450px] px-4 text-white text-center bg-cover bg-center flex items-center justify-center"
       style={{ backgroundImage: `url("/${img}")` }}
     >
       {/* Overlay */}
@@ -11,11 +12,11 @@ export default function Hero({ title, img, text, page }) {
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center text-center">
-        <h1 className="text-3xl md:text-5xl font-bold">{title}</h1>
+        <h1 className="text-3xl md:text-5xl py-2 font-bold">{title}</h1>
         {text && (
-          <p className="mt-4 text-lg md:text-xl ">
+          <NavLink to="/" className="mt-2 text-lg ">
             {text} <span className="text-gray-300">{page}</span>
-          </p>
+          </NavLink>
         )}
       </div>
     </section>

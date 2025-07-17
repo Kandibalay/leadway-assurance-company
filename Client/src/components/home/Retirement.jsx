@@ -66,7 +66,7 @@ const Retirement = () => {
             </div>
           </div>
           <div className="flex justify-center md:justify-start">
-            <button className="text-white bg-[#EA5B0C] rounded-lg w-[85%] md:w-[60%] py-3 text-[14px] lg:text-base font-semibold button-1">
+            <button className="text-white bg-[#EA5B0C] hover:bg-orange-700 rounded-lg w-[85%] md:w-[60%] py-3 text-[14px] lg:text-base font-semibold button-1">
               Start Your Retirement Plans
             </button>
           </div>
