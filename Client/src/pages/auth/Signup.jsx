@@ -10,8 +10,10 @@ import Apple from "../../assets/icons/apple_icon.svg";
 import Google from "../../assets/icons/google_icon.svg";
 import Facebook from "../../assets/icons/facebook_icon.svg"; 
 import { NavLink } from "react-router-dom";  
+import { useAuth } from "../../context/AuthContext2"; // Adjust the import path as necessary
 
 const SignUp = () => {
+  const { signup } = useAuth();
   const {
     register,
     handleSubmit,
@@ -31,9 +33,15 @@ const SignUp = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  const onSubmit = (data) => {
-    console.log(data);
-    reset();
+  const onSubmit = async (data) => {
+    try {
+      await signup(data);
+      alert('Signup successful!');
+      reset();
+    } catch (error) {
+      console.error('Failed to register user', error);
+      alert('Signup failed. Please try again.');
+    }
   };
 
   return (
