@@ -47,7 +47,7 @@ const AuthProvider = ({ children }) => {
   // Login function
   const login = async (userData) => {
     try {
-      const { data } = await axios.post('/auth/login', userData);
+      const { data } = await axios.post('/auth/sign-in', userData);
 
       if (!data?.error) {
         setAuth({
