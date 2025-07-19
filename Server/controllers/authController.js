@@ -10,13 +10,13 @@ import {
 // SIGN UP
 export const signUp = async (req, res) => {
   try {
-    const { firstName, lastName, email, password } = req.body;
+    const { fullName, email, password } = req.body;
 
     const existingUser = await USER.findOne({ email });
     if (existingUser)
       return res.status(400).json({ message: "Email already registered" });
 
-    const newUser = await USER.create({ firstName, lastName, email, password });
+    const newUser = await USER.create({ fullName, email, password });
 
     // Generate verification token
     const verifyToken = newUser.getVerifyEmailToken();
@@ -59,7 +59,6 @@ export const verifyEmail = async (req, res) => {
     user.verifyEmailTokenExpire = undefined;
     await user.save();
 
-    // Send welcome email after verification
     const welcomeEmail = generateWelcomeEmail(user);
     await sendEmail({
       to: user.email,
@@ -67,7 +66,6 @@ export const verifyEmail = async (req, res) => {
       html: welcomeEmail,
     });
 
-    // Redirect to frontend confirmation page
     res.redirect("http://localhost:5173/email-verified");
   } catch (err) {
     console.error("Email verify error:", err);
@@ -98,8 +96,7 @@ export const signIn = async (req, res) => {
       token,
       user: {
         id: user._id,
-        firstName: user.firstName,
-        lastName: user.lastName,
+        fullName: user.fullName,
         email: user.email,
         role: user.role,
       },

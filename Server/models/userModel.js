@@ -5,15 +5,25 @@ import jwt from "jsonwebtoken";
 import crypto from "crypto";
 
 const userSchema = new mongoose.Schema({
-  firstName: { type: String, required: true, trim: true },
-  lastName: { type: String, required: true, trim: true },
+  fullName: { type: String, required: true, trim: true },
   email: {
     type: String,
     required: true,
     unique: true,
     lowercase: true,
     trim: true,
-    validate: [validator.isEmail, "Invalid email"],
+    validate: [
+      {
+        validator: validator.isEmail,
+        message: "Invalid email",
+      },
+      {
+        validator: function (v) {
+          return !/@.*@/.test(v); // prevent multiple '@'
+        },
+        message: "Email cannot contain multiple '@' characters",
+      },
+    ],
   },
   password: {
     type: String,
@@ -40,7 +50,6 @@ const userSchema = new mongoose.Schema({
   resetPasswordExpire: Date,
 }, { timestamps: true });
 
-// Hash password before saving
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
   const salt = await bcrypt.genSalt();
@@ -48,37 +57,33 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-// Compare password
 userSchema.methods.comparePassword = function (userPassword) {
   return bcrypt.compare(userPassword, this.password);
 };
 
-// JWT Token
 userSchema.methods.generateToken = function () {
   return jwt.sign(
     {
       userId: this._id,
       role: this.role,
-      firstName: this.firstName,
+      fullName: this.fullName,
     },
     process.env.JWT_SECRET,
     { expiresIn: "24h" }
   );
 };
 
-// Generate reset password token
 userSchema.methods.getResetPasswordToken = function () {
   const resetToken = crypto.randomBytes(20).toString("hex");
   this.resetPasswordToken = crypto.createHash("sha256").update(resetToken).digest("hex");
-  this.resetPasswordExpire = Date.now() + 10 * 60 * 1000; // 10 minutes
+  this.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
   return resetToken;
 };
 
-// Generate email verification token
 userSchema.methods.getVerifyEmailToken = function () {
   const verifyToken = crypto.randomBytes(20).toString("hex");
   this.verifyEmailToken = crypto.createHash("sha256").update(verifyToken).digest("hex");
-  this.verifyEmailTokenExpire = Date.now() + 24 * 60 * 60 * 1000; // 24 hours
+  this.verifyEmailTokenExpire = Date.now() + 24 * 60 * 60 * 1000;
   return verifyToken;
 };
 
