@@ -10,7 +10,7 @@ import Apple from "../../assets/icons/apple_icon.svg";
 import Google from "../../assets/icons/google_icon.svg";
 import Facebook from "../../assets/icons/facebook_icon.svg"; 
 import { NavLink } from "react-router-dom";  
-import { useAuth } from "../../context/AuthContext2"; // Adjust the import path as necessary
+import { useAuth } from "../../context/AuthContext3"; // Adjust the import path as necessary
 
 const SignUp = () => {
   const { signup } = useAuth();

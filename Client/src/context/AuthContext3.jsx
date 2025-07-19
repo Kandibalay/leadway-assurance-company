@@ -1,6 +1,5 @@
 import React, { useState, createContext, useContext, useEffect } from 'react';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 
 // Create context
@@ -17,29 +16,28 @@ const AuthProvider = ({ children }) => {
     message: ''
   });
 
-  // Set base URL for axios from Vite env
+  // Set axios base URL from .env
   axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
-  // Update axios auth header when token changes
+  // Set Authorization header when token changes
   useEffect(() => {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${auth?.token}`;
+    if (auth?.token) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${auth.token}`;
+    } else {
+      delete axios.defaults.headers.common['Authorization'];
+    }
   }, [auth?.token]);
 
-  // Load auth from cookie on mount
+  // Load auth from localStorage on mount
   useEffect(() => {
-    const data = Cookies.get('auth');
+    const data = localStorage.getItem('auth');
     if (data) {
       try {
-        const parsedData = JSON.parse(data);
-        setAuth({
-          user: parsedData.user,
-          token: parsedData.token,
-          success: parsedData.success,
-          message: parsedData.message
-        });
+        const parsed = JSON.parse(data);
+        setAuth(parsed);
       } catch (error) {
-        console.error('Error parsing auth data from cookies:', error);
-        Cookies.remove('auth');
+        console.error('Failed to parse auth from localStorage:', error);
+        localStorage.removeItem('auth');
       }
     }
   }, []);
@@ -47,32 +45,26 @@ const AuthProvider = ({ children }) => {
   // Login function
   const login = async (userData) => {
     try {
-      const { data } = await axios.post('/auth/signin', userData);
+      const { data } = await axios.post('/auth/login', userData);
 
       if (!data?.error) {
-        setAuth({
+        const newAuth = {
           user: data.user,
-          token: data.token,
+          token: data.user.token,
           success: data.success,
           message: data.message
-        });
+        };
 
-        Cookies.set('auth', JSON.stringify(data), {
-          expires: 7,
-          secure: true,
-          sameSite: 'strict'
-        });
-
+        setAuth(newAuth);
+        localStorage.setItem('auth', JSON.stringify(newAuth));
         navigate('/');
         return data;
       } else {
         throw new Error(data.error);
       }
-
     } catch (error) {
-      const message = error?.response?.data?.message || 'An error occurred while logging in';
+      const message = error?.response?.data?.message || 'Login failed';
       console.error('Login error:', message);
-      setAuth((prev) => ({ ...prev, message }));
       throw new Error(message);
     }
   };
@@ -83,29 +75,23 @@ const AuthProvider = ({ children }) => {
       const { data } = await axios.post('/auth/signup', userData);
 
       if (!data.error) {
-        setAuth({
+        const newAuth = {
           user: data.user,
           token: data.token,
           success: data.success,
           message: data.message
-        });
+        };
 
-        Cookies.set('auth', JSON.stringify(data), {
-          expires: 7,
-          secure: true,
-          sameSite: 'strict'
-        });
-
-        navigate('/auth/sign-in');
+        setAuth(newAuth);
+        localStorage.setItem('auth', JSON.stringify(newAuth));
+        navigate('/auth/login');
         return data;
       } else {
         throw new Error(data.error);
       }
-
     } catch (error) {
-      const message = error?.response?.data?.message || 'An error occurred while signing up';
+      const message = error?.response?.data?.message || 'Signup failed';
       console.error('Signup error:', message);
-      setAuth((prev) => ({ ...prev, message }));
       throw new Error(message);
     }
   };
@@ -116,9 +102,7 @@ const AuthProvider = ({ children }) => {
       const { data } = await axios.post('/auth/forgotpassword', { email });
       return data;
     } catch (error) {
-      const message = error?.response?.data?.message || 'An error occurred while sending reset email';
-      console.error('Forgot Password error:', message);
-      throw new Error(message);
+      throw new Error(error?.response?.data?.message || 'Failed to send reset email');
     }
   };
 
@@ -128,15 +112,13 @@ const AuthProvider = ({ children }) => {
       const { data } = await axios.put(`/auth/resetpassword/${resetToken}`, passwords);
       return data;
     } catch (error) {
-      const message = error?.response?.data?.message || 'An error occurred while resetting password';
-      console.error('Reset Password error:', message);
-      throw new Error(message);
+      throw new Error(error?.response?.data?.message || 'Reset failed');
     }
   };
 
-  // Logout function
+  // Logout
   const logout = () => {
-    Cookies.remove('auth');
+    localStorage.removeItem('auth');
     setAuth({
       user: null,
       token: '',
@@ -163,7 +145,7 @@ const AuthProvider = ({ children }) => {
   );
 };
 
-// Custom hook
+// Custom Hook
 const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
