@@ -10,6 +10,7 @@ import chatbox from "../assets/icons/chatbox.svg";
 import Asset from "../components/home/Asset";
 import Retirement from "../components/home/Retirement";
 
+
 const Home = () => {
   const handleChatClick = () => {
     window.open("https://wa.me/2349030000000", "_blank");
@@ -27,6 +28,7 @@ const Home = () => {
           />
         </div>
       </div>
+      
       <Insurance />
       <Asset />
       <Retirement />
@@ -35,6 +37,7 @@ const Home = () => {
       <Blog />
       <Download />
       <Companies />
+      
     </div>
   );
 };

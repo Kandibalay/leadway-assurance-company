@@ -16,6 +16,7 @@ import MarineCargo from "./pages/insurance/MarineCargo";
 import SignUp from "./pages/auth/Signup";
 import Login from "./pages/auth/Login";
 import Blog from "./pages/Blog";
+import GetQuote from "./pages/GetQuote";
 
 function LayoutWrapper({ children }) {
   const location = useLocation();
@@ -43,6 +44,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/GetQuote" element={<GetQuote />} />
             {/* <Route path="/insurance" element={<Insurance />} /> */}
             <Route path="/insurance/marine" element={<Marine />} />
             <Route path="/marinecargo" element={<MarineCargo />} />
