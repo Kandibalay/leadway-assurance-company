@@ -1,5 +1,6 @@
 import USER from "../models/userModel.js";
 import crypto from "crypto";
+import Jwt from "jsonwebtoken";
 import sendEmail from "../utils/sendEmail.js";
 import {
   generateResetEmail,
@@ -9,10 +10,10 @@ import {
 
 // SIGN UP
 export const signUp = async (req, res) => {
-  const { email, password, fullName, cPassword } = req.body;
+  const { email, password, fullName} = req.body;
 
   // Validate required fields
-  if (!email || !password || !fullName || !cPassword) {
+  if (!email || !password || !fullName) {
     return res.status(400).json({
       success: false,
       errMsg: "All fields are required for registration",
@@ -20,11 +21,11 @@ export const signUp = async (req, res) => {
   }
 
   // Check password match
-  if (password !== cPassword) {
-    return res
-      .status(400)
-      .json({ success: false, errMsg: "Passwords do not match" });
-  }
+  // if (password !== cPassword) {
+  //   return res
+  //     .status(400)
+  //     .json({ success: false, errMsg: "Passwords do not match" });
+  // }
 
   // Check password length
   if (password.length < 8) {
@@ -61,7 +62,11 @@ export const signUp = async (req, res) => {
     });
 
     // Generate auth token
-    const token = newUser.generateToken();
+    // const token = newUser.generateToken();
+
+    const token = Jwt.sign(
+      { _id: newUser._id}, process.env.JWT_SECRET, {
+        expiresIn: "1h",})
 
     // Send successful response
     return res.status(201).json({
