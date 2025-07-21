@@ -11,7 +11,7 @@ const Blog = () => {
     <>
       <Hero title="Blog" img="hero-blog.jpg" text="Home > " page="Blog" />
 
-      <div className="mx-auto max-w-7xl lg:px-8 mt-10">
+      <div className="mx-auto container px-6 md:px-10 lg:px-14 mt-10">
         {/* Recent Articles  */}
         <h1 className="text-3xl font-bold text-center mb-8  text-gray-800">
           Recent Articles

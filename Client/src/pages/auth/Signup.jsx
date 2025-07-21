@@ -10,8 +10,10 @@ import Apple from "../../assets/icons/apple_icon.svg";
 import Google from "../../assets/icons/google_icon.svg";
 import Facebook from "../../assets/icons/facebook_icon.svg"; 
 import { NavLink } from "react-router-dom";  
+import { useAuth } from "../../context/AuthContext3"; // Adjust the import path as necessary
 
 const SignUp = () => {
+  const { signup } = useAuth();
   const {
     register,
     handleSubmit,
@@ -31,43 +33,49 @@ const SignUp = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  const onSubmit = (data) => {
-    console.log(data);
-    reset();
+  const onSubmit = async (data) => {
+    try {
+      await signup(data);
+      alert('Signup successful!');
+      reset();
+    } catch (error) {
+      console.error('Failed to register user', error);
+      alert('Signup failed. Please try again.');
+    }
   };
 
   return (
-    <div className="signup w-full h-full flex items-center justify-center bg-[#FFF6F2]">
+    <div className="signup min-h-screen w-full h-full  flex items-center justify-center bg-[#FFF6F2]">
       <form
-        className="w-[90%] max-w-3xl bg-white my-10 p-6 rounded-lg"
-        onSubmit={handleSubmit(onSubmit)}
+        className="w-[90%] max-w-lg max-h-[90%] bg-white my-6 py-6 px-6 md:py-12 md:px-16 rounded-3xl"
+        onSubmit={handleSubmit(onSubmit())}
       >
         <NavLink to="/" className="flex justify-center mb-6">
           <img src={Logo} alt="Logo" />
         </NavLink>
-        <div className="flex flex-col w-full max-w-sm  mx-auto items-center justify-center">
+        <div className="flex flex-col w-full max-w-lg  mx-auto items-center justify-center">
           <div className="w-full">
             <h1 className="text-xl font-semibold text-left text-black my-4">
               Create Account
             </h1>
             <div className="text-left text-gray-600 mb-4">
               <input
-                {...register("name", {
+                {...register("fullName", {
                   required: "This Field is required",
                   pattern: {
                     value:
                       /^[a-zA-Z]+(?:(?:|['_\. ])([a-zA-Z]*(\.\s)?[a-zA-Z])+)*$/,
-                    message: "Please enter a valid first name",
+                    message: "Please enter a valid name",
                   },
                 })}
                 type="text"
-                id="name"
+                id="fullName"
                 className="w-full border-b border-b-[#ADADAD] py-1 focus:outline-none text-[14px]"
                 placeholder="Full Name"
               />
-              {errors.name && (
+              {errors.fullName && (
                 <span className="text-red-500 text-[12px]">
-                  {errors.name.message}
+                  {errors.fullName.message}
                 </span>
               )}
             </div>
@@ -163,7 +171,7 @@ const SignUp = () => {
             </div>
             <button
               type="submit"
-              className="bg-[#EA5B0C] w-full text-[#ffffff] py-3 mt-4 rounded-lg text-[14px]"
+              className="bg-[#EA5B0C] w-full text-[#ffffff] py-3 mt-4 rounded-lg text-[14px] cursor-pointer transition-transform transform hover:scale-110"
             >
               Sign Up
             </button>
@@ -186,9 +194,9 @@ const SignUp = () => {
             <div className="text-center mt-4">
                 <p className="text-[#969696] text-[12px] mt-4">
                     Already have an account?{" "}
-                    <a href="/auth/login" className="text-[#EA5B0C] font-semibold">
+                    <NavLink to="/auth/login" className="text-[#EA5B0C] font-semibold">
                     Login
-                    </a>
+                    </NavLink>
                 </p>
             </div>
           </div>

@@ -1,36 +1,35 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import { connectDB } from './config/db.config.js';
-import productRoute from './routes/productRoute.js';
-import faqRoute from './routes/faqRoute.js';
-import contactRoute from './routes/contactRoute.js';
-
-
-
-
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import mongoose from "mongoose";
+import authRoutes from "./routes/authRoutes.js";
+import newsletterRoutes from "./routes/newsletterRoutes.js"; 
+import contactRoutes from "./routes/contactRoutes.js";
+import marineRoutes from "./routes/marineRoutes.js";
 
 dotenv.config();
- 
 
 const app = express();
+const PORT = process.env.PORT || 5000;
 
+// Middleware
 app.use(cors());
-
 app.use(express.json());
 
-const PORT = process.env.PORT ;
+// Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/newsletter", newsletterRoutes); 
+app.use("/api/contact", contactRoutes);
+app.use("/api/marine", marineRoutes);
 
-app.get("/", (req, res)=> {
-    return res.send("welcome to leadway Assurance")
-    })
-    //  Api Routes
-  app.use("/api/products", productRoute);
-  app.use("/api/faqs", faqRoute);
-  app.use("/api/contacts", contactRoute);
+app.get("/", (req, res) => {
+  res.send("Leadway backend is running...");
+});
 
-    app.listen(PORT, () => {
-        connectDB();
-        console.log(`server is running on port ${PORT}`);
-    })
-
+// DB Connection
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log("MongoDB connected");
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  })
+  .catch(err => console.error(err));
