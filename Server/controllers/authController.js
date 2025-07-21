@@ -63,7 +63,7 @@ export const signUp = async (req, res) => {
 
     // Generate auth token
     const token = jwt.sign(
-      { _id: newUser._id, fullName: newUser.fullName, email: newUser.email },
+      { _id: newUser._id},
       process.env.JWT_SECRET,
       { expiresIn: "24h" }
     );
@@ -76,8 +76,8 @@ export const signUp = async (req, res) => {
         _id: newUser._id,
         fullName: newUser.fullName,
         email: newUser.email,
-        token,
       },
+      token
     });
 
   } catch (error) {
@@ -167,7 +167,7 @@ export const signIn = async (req, res) => {
 
     // Generate token 
     const token = jwt.sign(
-      { _id: user._id, fullName: user.fullName, email: user.email },
+      { _id: user._id },
       process.env.JWT_SECRET,
       { expiresIn: "24h" }
     );
@@ -179,9 +179,9 @@ export const signIn = async (req, res) => {
       user: {
         _id: user._id,
         fullName: user.fullName,
-        email: user.email,
-        token,
+        email: user.email
       },
+      token
     });
 
   } catch (error) {
