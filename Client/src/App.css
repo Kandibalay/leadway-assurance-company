@@ -58,6 +58,15 @@ body {
   align-items: center;
   text-align: center;
 }
+.getquote-hero{
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 
 .retire {
   background-image: url("./assets/images/retire bg.png");

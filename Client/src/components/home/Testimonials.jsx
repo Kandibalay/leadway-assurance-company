@@ -77,7 +77,7 @@ const TestimonialCard = ({ testimonial }) => {
 
 const Testimonials = () => {
   const [current, setCurrent] = useState(0);
-  const visibleCards = 3;
+  const visibleCards = 5;
 
   const nextSlide = () => {
     setCurrent((prev) => (prev + 1) % testimonials.length);
@@ -104,49 +104,83 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="py-6  px-6 md:px-10 lg:px-14 bg-white text-black text-center overflow-hidden">
-      <h2 className="text-[28px] lg:text-[36px] font-bold mb-4 lg:mb-10">Testimonials</h2>
+   <section className="py-16 bg-white text-black text-center overflow-hidden">
+      <h2 className="text-3xl font-bold mb-10">Testimonials</h2>
 
-      <div className="relative flex items-center justify-center max-w-6xl mx-auto">
-        <button
-          onClick={prevSlide}
-          className="absolute left-0 bg-orange-500 text-white p-2 rounded-full z-10 hover:bg-orange-600"
-        >
-          <FiChevronLeft size={24} />
-        </button>
-
+      <div className="flex items-center justify-center max-w-6xl mx-auto">
         <div className="flex gap-6 justify-center transition-transform duration-500 ease-in-out">
-          {getVisibleTestimonials().map((testimonial, index) => (
-            <div
-              key={index}
-              className="w-[300px] bg-white shadow-md rounded-lg p-6"
-            >
-              <TestimonialCard testimonial={testimonial} />
-            </div>
-          ))}
+          {getVisibleTestimonials().map((testimonial, index) => {
+            // index 2 is the middle card when showing 5
+            let cardClass = "";
+            if (index === 2) {
+              cardClass = "shadow-2xl scale-110 z-10";
+            } else if (index === 1 || index === 3) {
+              cardClass = "shadow-lg scale-100 opacity-80 z-0";
+            } else {
+              cardClass = "shadow-md scale-95 opacity-50 blur-[1px] z-0";
+            }
+        return (
+              <div
+                key={index}
+                className={`
+                  w-[260px] bg-white rounded-lg p-6
+                  transition-all duration-500
+                  ${cardClass}
+                `}
+                style={{
+                  fontWeight: index === 2 ? "bold" : "normal",
+                }}
+              >
+                <TestimonialCard testimonial={testimonial} />
+              </div>
+            );
+          })}
         </div>
-
-        <button
-          onClick={nextSlide}
-          className="absolute right-0 bg-orange-500 text-white p-2 rounded-full z-10 hover:bg-orange-600"
-        >
-          <FiChevronRight size={24} />
-        </button>
       </div>
 
-      <div className="flex justify-center mt-6 space-x-2">
-        {testimonials.map((_, idx) => (
-          <div
-            key={idx}
-            onClick={() => setCurrent(idx)}
-            className={`w-3 h-3 rounded-full cursor-pointer ${
-              idx === current ? "bg-orange-400" : "bg-gray-300"
-            }`}
-          />
-        ))}
+    {/* Pagination with arrows */}
+    <div className="flex justify-center items-center mt-6 space-x-4">
+      <button
+        onClick={prevSlide}
+        className="bg-orange-500 text-white p-2 rounded-full hover:bg-orange-600"
+      >
+        <FiChevronLeft size={24} />
+      </button>
+
+      <div className="flex space-x-2">
+        {getVisibleTestimonials().map((_, idx) => {
+          // Middle dot is always index 1
+          const isMiddle = idx === 1;
+          return (
+            <div
+              key={idx}
+              className={`w-4 h-4 rounded-full flex items-center justify-center cursor-pointer transition-all
+                ${isMiddle ? "bg-orange-500 font-bold scale-125 text-white shadow-lg" : "bg-gray-300 text-gray-400"}
+              `}
+              style={{
+                fontWeight: isMiddle ? "bold" : "normal",
+                fontSize: isMiddle ? "1.25rem" : "1rem",
+              }}
+              // Optional: allow clicking dots to jump to testimonial
+              onClick={() => setCurrent((current + idx) % testimonials.length)}
+            >
+              {/* Use a dot or leave empty for just a circle */}
+              {isMiddle ? <span className="block w-2 h-2 rounded-full bg-white" /> : ""}
+            </div>
+          );
+        })}
       </div>
-    </section>
-  );
+
+      <button
+        onClick={nextSlide}
+        className="bg-orange-500 text-white p-2 rounded-full hover:bg-orange-600"
+      >
+        <FiChevronRight size={24} />
+      </button>
+    </div>
+  </section>
+);
+
 };
 
 export default Testimonials;
