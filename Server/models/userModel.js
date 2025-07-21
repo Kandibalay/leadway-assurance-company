@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
       },
       {
         validator: function (v) {
-          return !/@.*@/.test(v); // prevent multiple '@'
+          return !/@.*@/.test(v);
         },
         message: "Email cannot contain multiple '@' characters",
       },
@@ -34,11 +34,6 @@ const userSchema = new mongoose.Schema({
         throw new Error("Password cannot contain 'password'");
       }
     },
-  },
-  role: {
-    type: String,
-    enum: ["admin", "customer"],
-    default: "customer",
   },
   isVerified: {
     type: Boolean,
@@ -65,7 +60,6 @@ userSchema.methods.generateToken = function () {
   return jwt.sign(
     {
       userId: this._id,
-      role: this.role,
       fullName: this.fullName,
     },
     process.env.JWT_SECRET,
