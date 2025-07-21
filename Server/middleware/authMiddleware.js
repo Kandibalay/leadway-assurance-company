@@ -1,20 +1,28 @@
 import jwt from "jsonwebtoken";
-import USER from "../models/userModel.js";
 
-export const verifyToken = async (req, res, next) => {
+const auth = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res.status(401).json({ message: "No token provided" });
+    return res.status(401).json({ success: false, errMsg: "Unauthorized" });
   }
 
   const token = authHeader.split(" ")[1];
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = await USER.findById(decoded.userId).select("-password");
+    const payload = jwt.verify(token, process.env.JWT_SECRET);
+
+    // Attach user info (no more role)
+    req.user = {
+      userId: payload.userId,
+      fullName: payload.fullName,
+      email: payload.email,
+    };
+
     next();
-  } catch (err) {
-    return res.status(401).json({ message: "Invalid or expired token" });
+  } catch (error) {
+    return res.status(401).json({ success: false, errMsg: "Auth failed" });
   }
 };
+
+export default auth;
