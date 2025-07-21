@@ -12,7 +12,6 @@ const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({
     user: null,
     token: '',
-    success: false,
     message: ''
   });
 
@@ -78,7 +77,6 @@ const AuthProvider = ({ children }) => {
         const newAuth = {
           user: data.user,
           token: data.token,
-          success: data.success,
           message: data.message
         };
 
