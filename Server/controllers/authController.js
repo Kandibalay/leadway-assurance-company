@@ -12,13 +12,16 @@ export const signUp = async (req, res) => {
   try {
     const { fullName, email, password } = req.body;
 
+    if (!email || /@.*@/.test(email)) {
+      return res.status(400).json({ message: "Invalid email format" });
+    }
+
     const existingUser = await USER.findOne({ email });
     if (existingUser)
       return res.status(400).json({ message: "Email already registered" });
 
     const newUser = await USER.create({ fullName, email, password });
 
-    // Generate verification token
     const verifyToken = newUser.getVerifyEmailToken();
     await newUser.save();
 
@@ -98,7 +101,6 @@ export const signIn = async (req, res) => {
         id: user._id,
         fullName: user.fullName,
         email: user.email,
-        role: user.role,
       },
     });
   } catch (err) {
