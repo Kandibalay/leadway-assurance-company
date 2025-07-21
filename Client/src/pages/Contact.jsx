@@ -88,7 +88,7 @@ import Hero from "../components/Hero";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    name: "",
+    fullName: "",
     message: "",
   });
 
@@ -110,7 +110,7 @@ const Contact = () => {
     try {
       const res = await axios.post("/contact/submit", formData);
       setResponseMsg("Message sent successfully!");
-      setFormData({ name: "", message: "" });
+      setFormData({ fullName: "", message: "" });
     } catch (error) {
       setResponseMsg("Something went wrong. Please try again.");
     } finally {
@@ -135,8 +135,8 @@ const Contact = () => {
             </label>
             <input
               type="text"
-              name="name"
-              value={formData.name}
+              name="fullName"
+              value={formData.fullName}
               onChange={handleChange}
               placeholder="Full Name"
               className="w-full p-2 border border-gray-300 rounded text-gray-700 outline-none text-[14px]"

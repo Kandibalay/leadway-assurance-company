@@ -48,7 +48,7 @@ const SignUp = () => {
     <div className="signup min-h-screen w-full h-full  flex items-center justify-center bg-[#FFF6F2]">
       <form
         className="w-[90%] max-w-lg max-h-[90%] bg-white my-6 py-6 px-6 md:py-12 md:px-16 rounded-3xl"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(onSubmit())}
       >
         <NavLink to="/" className="flex justify-center mb-6">
           <img src={Logo} alt="Logo" />
@@ -60,22 +60,22 @@ const SignUp = () => {
             </h1>
             <div className="text-left text-gray-600 mb-4">
               <input
-                {...register("name", {
+                {...register("fullName", {
                   required: "This Field is required",
                   pattern: {
                     value:
                       /^[a-zA-Z]+(?:(?:|['_\. ])([a-zA-Z]*(\.\s)?[a-zA-Z])+)*$/,
-                    message: "Please enter a valid first name",
+                    message: "Please enter a valid name",
                   },
                 })}
                 type="text"
-                id="name"
+                id="fullName"
                 className="w-full border-b border-b-[#ADADAD] py-1 focus:outline-none text-[14px]"
                 placeholder="Full Name"
               />
-              {errors.name && (
+              {errors.fullName && (
                 <span className="text-red-500 text-[12px]">
-                  {errors.name.message}
+                  {errors.fullName.message}
                 </span>
               )}
             </div>
