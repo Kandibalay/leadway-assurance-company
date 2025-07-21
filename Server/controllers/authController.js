@@ -9,39 +9,78 @@ import {
 
 // SIGN UP
 export const signUp = async (req, res) => {
-  try {
-    const { fullName, email, password } = req.body;
+  const { email, password, fullName, cPassword } = req.body;
 
-    if (!email || /@.*@/.test(email)) {
-      return res.status(400).json({ message: "Invalid email format" });
+  // Validate required fields
+  if (!email || !password || !fullName || !cPassword) {
+    return res.status(400).json({
+      success: false,
+      errMsg: "All fields are required for registration",
+    });
+  }
+
+  // Check password match
+  if (password !== cPassword) {
+    return res
+      .status(400)
+      .json({ success: false, errMsg: "Passwords do not match" });
+  }
+
+  // Check password length
+  if (password.length < 8) {
+    return res
+      .status(400)
+      .json({ success: false, errMsg: "Password must be at least 8 characters long" });
+  }
+
+  try {
+    // Check if email already exists
+    const existingEmail = await USER.findOne({ email });
+    if (existingEmail) {
+      return res
+        .status(400)
+        .json({ success: false, errMsg: "Email already exists" });
     }
 
-    const existingUser = await USER.findOne({ email });
-    if (existingUser)
-      return res.status(400).json({ message: "Email already registered" });
-
+    // Create new user
     const newUser = await USER.create({ fullName, email, password });
 
+    // Generate email verification token
     const verifyToken = newUser.getVerifyEmailToken();
     await newUser.save();
 
-    const verifyUrl = `http://localhost:5173/verify-email/${verifyToken}`;
+    const verifyUrl = `${process.env.CLIENT_URL}/verify-email/${verifyToken}`;
     const verifyEmailHTML = generateVerifyEmail(newUser, verifyUrl);
 
+
+    // Send email verification
     await sendEmail({
       to: newUser.email,
       subject: "Verify Your Email",
       html: verifyEmailHTML,
     });
 
-    res.status(201).json({
-      message: "Signup successful. Please check your email to verify your account.",
+    // Generate auth token
+    const token = newUser.generateToken();
+
+    // Send successful response
+    return res.status(201).json({
+      success: true,
+      message: "Registration successful. Please check your email to verify your account.",
+      user: {
+        _id: newUser._id,
+        fullName: newUser.fullName,
+        email: newUser.email,
+        token,
+      },
     });
-  } catch (err) {
-    console.error("Sign up error:", err);
-    res.status(500).json({ message: "Server error" });
+
+  } catch (error) {
+    console.error("Sign up error:", error);
+    return res.status(500).json({ success: false, errMsg: error.message });
   }
 };
+
 
 // VERIFY EMAIL
 export const verifyEmail = async (req, res) => {
@@ -69,7 +108,7 @@ export const verifyEmail = async (req, res) => {
       html: welcomeEmail,
     });
 
-    res.redirect("http://localhost:5173/email-verified");
+    res.redirect(`${process.env.CLIENT_URL}/email-verified`);
   } catch (err) {
     console.error("Email verify error:", err);
     res.status(500).json({ message: "Server error" });
@@ -78,89 +117,145 @@ export const verifyEmail = async (req, res) => {
 
 // SIGN IN
 export const signIn = async (req, res) => {
+  const { email, password } = req.body;
+
   try {
-    const { email, password } = req.body;
+    // Check if fields are provided
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        errMsg: "All fields are required to sign in",
+      });
+    }
 
+    // Find user by email
     const user = await USER.findOne({ email });
-    if (!user)
-      return res.status(400).json({ message: "Invalid credentials" });
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        errMsg: "User not found",
+      });
+    }
 
-    if (!user.isVerified)
-      return res.status(403).json({ message: "Please verify your email before logging in." });
+    // Check if email is verified
+    if (!user.isVerified) {
+      return res.status(403).json({
+        success: false,
+        errMsg: "Please verify your email before signing in.",
+      });
+    }
 
+    // Compare password
     const isMatch = await user.comparePassword(password);
-    if (!isMatch)
-      return res.status(400).json({ message: "Invalid credentials" });
+    if (!isMatch) {
+      return res.status(401).json({
+        success: false,
+        errMsg: "Email or password is incorrect",
+      });
+    }
 
-    const token = user.generateToken();
+    // Generate JWT token
+    const token = await user.generateToken();
 
-    res.status(200).json({
-      message: "Sign in successful",
-      token,
+    // Send response
+    return res.status(200).json({
+      success: true,
+      message: "Signed in successfully",
       user: {
-        id: user._id,
+        _id: user._id,
         fullName: user.fullName,
         email: user.email,
+        token,
       },
     });
-  } catch (err) {
-    console.error("Sign in error:", err);
-    res.status(500).json({ message: "Server error" });
+  } catch (error) {
+    console.error("Sign in error:", error);
+    return res.status(500).json({ success: false, errMsg: error.message });
   }
 };
 
+
 // FORGOT PASSWORD
+
 export const forgotPassword = async (req, res) => {
+  const { email } = req.body;
+
   try {
-    const { email } = req.body;
+    if (!email) {
+      return res
+        .status(400)
+        .json({ success: false, errMsg: "Email is required" });
+    }
 
     const user = await USER.findOne({ email });
-    if (!user)
-      return res.status(404).json({ message: "User not found" });
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, errMsg: "Email not found" });
+    }
 
+    // Generate reset token
     const resetToken = user.getResetPasswordToken();
     await user.save();
 
-    const resetUrl = `http://localhost:5000/api/auth/reset-password/${resetToken}`;
+    const resetUrl = `${process.env.CLIENT_URL_RESET}${resetToken}`;
     const emailHTML = generateResetEmail(user, resetUrl);
 
-    await sendEmail({
-      to: user.email,
-      subject: "Leadway Password Reset",
-      html: emailHTML,
-    });
+    try {
+      await sendEmail({
+        to: user.email,
+        subject: "Leadway Password Reset",
+        html: emailHTML,
+      });
 
-    res.json({ message: "Reset link sent to your email" });
-  } catch (err) {
-    console.error("Forgot password error:", err);
-    res.status(500).json({ message: "Server error" });
+      return res.status(201).json({
+        success: true,
+        message: "Password reset link sent to your email",
+      });
+    } catch (emailError) {
+      user.resetPasswordToken = undefined;
+      user.resetPasswordExpire = undefined;
+      await user.save();
+      return res.status(500).json({
+        success: false,
+        errMsg: "Email could not be sent",
+        error: emailError.message,
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({ success: false, errMsg: error.message });
   }
 };
 
+
 // RESET PASSWORD
 export const resetPassword = async (req, res) => {
+  const resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(req.params.resetToken)
+    .digest("hex");
+
   try {
-    const { token } = req.params;
-    const { newPassword } = req.body;
-
-    const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
-
     const user = await USER.findOne({
-      resetPasswordToken: hashedToken,
+      resetPasswordToken,
       resetPasswordExpire: { $gt: Date.now() },
     });
 
-    if (!user)
-      return res.status(400).json({ message: "Invalid or expired token" });
+    if (!user) {
+      return res
+        .status(400)
+        .json({ success: false, errMsg: "Invalid or expired reset token" });
+    }
 
-    user.password = newPassword;
+    user.password = req.body.password;
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
     await user.save();
 
-    res.json({ message: "Password reset successful" });
-  } catch (err) {
-    console.error("Reset password error:", err);
-    res.status(500).json({ message: "Server error" });
+    return res
+      .status(201)
+      .json({ success: true, message: "Password reset successful" });
+  } catch (error) {
+    return res.status(500).json({ success: false, errMsg: error.message });
   }
 };
