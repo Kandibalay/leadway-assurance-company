@@ -19,7 +19,7 @@ const VerifyEmail = () => {
             setCountdown((prevCountdown) => {
               if (prevCountdown <= 1) {
                 clearInterval(timer);
-                navigate('/login');
+                navigate('/signin');
                 return 0;
               }
               return prevCountdown - 1;
