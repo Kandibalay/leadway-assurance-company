@@ -13,6 +13,6 @@ router.post("/signup", signUp);
 router.post("/signin", signIn);
 router.post("/forgot-password", forgotPassword);
 router.post("/reset-password/:token", resetPassword);
-router.post("/verify-email/:token", verifyEmail);
+router.get("/verify-email/:token", verifyEmail);
 
 export default router;
