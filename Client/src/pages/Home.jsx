@@ -9,6 +9,7 @@ import Download from "../components/home/Download";
 import chatbox from "../assets/icons/chatbox.svg";
 import Asset from "../components/home/Asset";
 import Retirement from "../components/home/Retirement";
+import GetQuote from "../pages/GetQuote";
 
 
 const Home = () => {
@@ -35,6 +36,7 @@ const Home = () => {
           />
         </div>
       </div>
+
       
       <Insurance />
       <Asset />
