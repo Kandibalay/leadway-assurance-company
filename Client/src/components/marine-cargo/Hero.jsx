@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+// import MarineQuoteModal from "../modals/marineQuoteModal";
 
 const Hero = () => {
   return (
@@ -17,9 +18,7 @@ const Hero = () => {
           </NavLink>
         </NavLink>
         <div className="my-5">
-          <button className="text-white bg-orange-500 hover:bg-orange-800 rounded-md w-30 py-3 font-semibold button">
-            Get Quote
-          </button>
+          {/* <MarineQuoteModal /> */}
         </div>
       </div>
     </div>

@@ -71,6 +71,7 @@ import Login from "./pages/auth/Login";
 import Blog from "./pages/Blog";
 import CardCarousel from "./pages/Carousel";
 import { Routes, Route, useLocation } from "react-router-dom";
+import GetQuote from "./pages/GetQuote";
 import VerifyEmail from "./pages/auth/VerifyEmail";
 import ResetPassword from "./pages/auth/ResetPassword";
 import ForgotPassword from "./pages/auth/ForgotPassword";
@@ -101,6 +102,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/carousel" element={<CardCarousel />} />
+        <Route path="/GetQuote" element={<GetQuote />} />
 
         {/* Public Auth Routes */}
         <Route path="/auth/signup" element={<SignUp />} />
