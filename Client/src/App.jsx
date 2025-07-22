@@ -71,6 +71,7 @@ import Login from "./pages/auth/Login";
 import Blog from "./pages/Blog";
 import CardCarousel from "./pages/Carousel";
 import { Routes, Route, useLocation } from "react-router-dom";
+import GetQuote from "./pages/GetQuote";
 
 // Optional: import PrivateRoute if you want to protect routes
 // import PrivateRoute from "./components/PrivateRoute";
@@ -98,6 +99,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/carousel" element={<CardCarousel />} />
+        <Route path="/GetQuote" element={<GetQuote />} />
 
         {/* Public Auth Routes */}
         <Route path="/auth/signup" element={<SignUp />} />
