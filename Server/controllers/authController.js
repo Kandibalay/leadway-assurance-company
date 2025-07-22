@@ -1,6 +1,7 @@
 import USER from "../models/userModel.js";
 import crypto from "crypto";
 import sendEmail from "../utils/sendEmail.js";
+import jwt from "jsonwebtoken";
 import {
   generateResetEmail,
   generateWelcomeEmail,
@@ -9,28 +10,14 @@ import {
 
 // SIGN UP
 export const signUp = async (req, res) => {
-  const { email, password, fullName, cPassword } = req.body;
+  const { email, password, fullName } = req.body;
 
   // Validate required fields
-  if (!email || !password || !fullName || !cPassword) {
+  if (!email || !password || !fullName) {
     return res.status(400).json({
       success: false,
       errMsg: "All fields are required for registration",
     });
-  }
-
-  // Check password match
-  if (password !== cPassword) {
-    return res
-      .status(400)
-      .json({ success: false, errMsg: "Passwords do not match" });
-  }
-
-  // Check password length
-  if (password.length < 8) {
-    return res
-      .status(400)
-      .json({ success: false, errMsg: "Password must be at least 8 characters long" });
   }
 
   try {
@@ -61,7 +48,11 @@ export const signUp = async (req, res) => {
     });
 
     // Generate auth token
-    const token = newUser.generateToken();
+    const token = jwt.sign(
+      { _id: newUser._id},
+      process.env.JWT_SECRET,
+      { expiresIn: "24h" }
+    );
 
     // Send successful response
     return res.status(201).json({
@@ -71,8 +62,8 @@ export const signUp = async (req, res) => {
         _id: newUser._id,
         fullName: newUser.fullName,
         email: newUser.email,
-        token,
       },
+      token
     });
 
   } catch (error) {
@@ -84,8 +75,9 @@ export const signUp = async (req, res) => {
 
 // VERIFY EMAIL
 export const verifyEmail = async (req, res) => {
+  const { token } = req.params;
   try {
-    const { token } = req.params;
+    
     const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
 
     const user = await USER.findOne({
@@ -109,6 +101,10 @@ export const verifyEmail = async (req, res) => {
     });
 
     res.redirect(`${process.env.CLIENT_URL}/email-verified`);
+    res.status(200).json({
+      success: true,
+      message: "Email verified succesfully"
+    })
   } catch (err) {
     console.error("Email verify error:", err);
     res.status(500).json({ message: "Server error" });
@@ -116,11 +112,12 @@ export const verifyEmail = async (req, res) => {
 };
 
 // SIGN IN
+
 export const signIn = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Check if fields are provided
+    // Validate input
     if (!email || !password) {
       return res.status(400).json({
         success: false,
@@ -128,7 +125,7 @@ export const signIn = async (req, res) => {
       });
     }
 
-    // Find user by email
+    // Find user
     const user = await USER.findOne({ email });
     if (!user) {
       return res.status(404).json({
@@ -137,7 +134,7 @@ export const signIn = async (req, res) => {
       });
     }
 
-    // Check if email is verified
+    // Check verification
     if (!user.isVerified) {
       return res.status(403).json({
         success: false,
@@ -154,20 +151,25 @@ export const signIn = async (req, res) => {
       });
     }
 
-    // Generate JWT token
-    const token = await user.generateToken();
+    // Generate token 
+    const token = jwt.sign(
+      { _id: user._id },
+      process.env.JWT_SECRET,
+      { expiresIn: "24h" }
+    );
 
-    // Send response
+    // Return success response
     return res.status(200).json({
       success: true,
       message: "Signed in successfully",
       user: {
         _id: user._id,
         fullName: user.fullName,
-        email: user.email,
-        token,
+        email: user.email
       },
+      token
     });
+
   } catch (error) {
     console.error("Sign in error:", error);
     return res.status(500).json({ success: false, errMsg: error.message });
@@ -230,32 +232,28 @@ export const forgotPassword = async (req, res) => {
 
 // RESET PASSWORD
 export const resetPassword = async (req, res) => {
-  const resetPasswordToken = crypto
-    .createHash("sha256")
-    .update(req.params.resetToken)
-    .digest("hex");
-
   try {
+    const { token } = req.params;
+    const { newPassword } = req.body;
+
+    const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+
     const user = await USER.findOne({
-      resetPasswordToken,
+      resetPasswordToken: hashedToken,
       resetPasswordExpire: { $gt: Date.now() },
     });
 
-    if (!user) {
-      return res
-        .status(400)
-        .json({ success: false, errMsg: "Invalid or expired reset token" });
-    }
+    if (!user) return res.status(400).json({ message: "Invalid or expired token" });
 
-    user.password = req.body.password;
+    user.password = newPassword;
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
     await user.save();
 
-    return res
-      .status(201)
-      .json({ success: true, message: "Password reset successful" });
-  } catch (error) {
-    return res.status(500).json({ success: false, errMsg: error.message });
+    res.json({ message: "Password reset successful" });
+  } catch (err) {
+    console.error("Reset password error:", err);
+    res.status(500).json({ message: "Server error" });
   }
 };
+

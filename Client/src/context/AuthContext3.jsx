@@ -12,7 +12,7 @@ const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({
     user: null,
     token: '',
-    success: false,
+    // success: false,
     message: ''
   });
 
@@ -45,7 +45,7 @@ const AuthProvider = ({ children }) => {
   // Login function
   const login = async (userData) => {
     try {
-      const { data } = await axios.post('/auth/login', userData);
+      const { data } = await axios.post('/auth/signin', userData);
 
       if (!data?.error) {
         const newAuth = {
@@ -78,13 +78,13 @@ const AuthProvider = ({ children }) => {
         const newAuth = {
           user: data.user,
           token: data.token,
-          success: data.success,
+        //   success: data.success,
           message: data.message
         };
 
         setAuth(newAuth);
         localStorage.setItem('auth', JSON.stringify(newAuth));
-        navigate('/auth/login');
+        navigate('/auth/signin');
         return data;
       } else {
         throw new Error(data.error);
@@ -99,7 +99,7 @@ const AuthProvider = ({ children }) => {
   // Forgot Password
   const forgotPassword = async (email) => {
     try {
-      const { data } = await axios.post('/auth/forgotpassword', { email });
+      const { data } = await axios.post('/auth/forgot-password', { email });
       return data;
     } catch (error) {
       throw new Error(error?.response?.data?.message || 'Failed to send reset email');
@@ -109,7 +109,7 @@ const AuthProvider = ({ children }) => {
   // Reset Password
   const resetPassword = async (resetToken, passwords) => {
     try {
-      const { data } = await axios.put(`/auth/resetpassword/${resetToken}`, passwords);
+      const { data } = await axios.put(`/auth/reset-password/${resetToken}`, passwords);
       return data;
     } catch (error) {
       throw new Error(error?.response?.data?.message || 'Reset failed');
@@ -125,7 +125,7 @@ const AuthProvider = ({ children }) => {
       success: false,
       message: ''
     });
-    navigate('/auth/login');
+    navigate('/auth/signin');
   };
 
   return (
