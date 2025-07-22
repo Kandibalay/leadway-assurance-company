@@ -71,13 +71,16 @@ import Login from "./pages/auth/Login";
 import Blog from "./pages/Blog";
 import CardCarousel from "./pages/Carousel";
 import { Routes, Route, useLocation } from "react-router-dom";
+import VerifyEmail from "./pages/auth/VerifyEmail";
+import ResetPassword from "./pages/auth/ResetPassword";
+import ForgotPassword from "./pages/auth/ForgotPassword";
 
 // Optional: import PrivateRoute if you want to protect routes
 // import PrivateRoute from "./components/PrivateRoute";
 
 function LayoutWrapper({ children }) {
   const location = useLocation();
-  const noLayoutRoutes = ["/auth/login", "/auth/signup"];
+  const noLayoutRoutes = ["/auth/signin", "/auth/signup", "/auth/forgot-password", "/auth/reset-password/:token"];
   const hideLayout = noLayoutRoutes.includes(location.pathname);
 
   return (
@@ -101,7 +104,10 @@ function App() {
 
         {/* Public Auth Routes */}
         <Route path="/auth/signup" element={<SignUp />} />
-        <Route path="/auth/login" element={<Login />} />
+        <Route path="/auth/signin" element={<Login />} />
+        <Route path="/auth/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
+        <Route path="/verify-email/:token" element={<VerifyEmail />} />
 
         {/* Protected Routes (Optional: Wrap in <PrivateRoute>) */}
         <Route path="/insurance/marine" element={<Marine />} />

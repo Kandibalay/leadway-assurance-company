@@ -20,20 +20,6 @@ export const signUp = async (req, res) => {
     });
   }
 
-  // Check password match
-  // if (password !== cPassword) {
-  //   return res
-  //     .status(400)
-  //     .json({ success: false, errMsg: "Passwords do not match" });
-  // }
-
-  // Check password length
-  // if (password.length < 8) {
-  //   return res
-  //     .status(400)
-  //     .json({ success: false, errMsg: "Password must be at least 8 characters long" });
-  // }
-
   try {
     // Check if email already exists
     const existingEmail = await USER.findOne({ email });

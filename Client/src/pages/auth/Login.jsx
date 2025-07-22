@@ -10,15 +10,16 @@ import Apple from "../../assets/icons/apple_icon.svg";
 import Google from "../../assets/icons/google_icon.svg";
 import Facebook from "../../assets/icons/facebook_icon.svg";   
 import { NavLink } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext3.jsx';
 
 
 const Login = () => {
+  const {login: loginUser}= useAuth();
      const {
         register,
         handleSubmit,
         formState: { errors },
         reset,
-        watch,
       } = useForm();
     
       const [showPassword, setShowPassword] = useState(false);
@@ -26,9 +27,15 @@ const Login = () => {
       const togglePasswordVisibilityOne = () => {
         setShowPassword(!showPassword);
       };
-      const onSubmit = (data) => {
-        console.log(data);
-        reset();
+      const onSubmit = async (data) => {
+        try {
+          await loginUser(data);
+          alert('Login successful!');
+          reset();
+        } catch (error) {
+          console.error('Failed to login user', error);
+          alert('Login failed. Please try again.');
+        }
       };
   return (
       <div className="signin w-full min-h-screen h-full flex items-center justify-center bg-[#FFF6F2]">
@@ -117,7 +124,7 @@ const Login = () => {
                     )}
                    </div>
                    <div>
-                    <a href="#" className="underline text-[#222222] text-[12px] lg:text-[14px]">Forgot Password</a>
+                    <NavLink to="/auth/forgot-password" className="underline text-[#222222] text-[12px] lg:text-[14px]">Forgot Password</NavLink>
                    </div>
 
                 </div>
