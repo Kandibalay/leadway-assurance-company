@@ -9,32 +9,66 @@ const VerifyEmail = () => {
   const [countdown, setCountdown] = useState(5);
   const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   const verifyEmailToken = async () => {
+  //     try {
+  //       const { data } = await axios.post(`/auth/verify-email/${token}`);
+  //       if (data.success) {
+  //         setStatus('Email verified successfully!');
+  //         const timer = setInterval(() => {
+  //           setCountdown((prevCountdown) => {
+  //             if (prevCountdown <= 1) {
+  //               clearInterval(timer);
+  //               navigate('/signin');
+  //               return 0;
+  //             }
+  //             return prevCountdown - 1;
+  //           });
+  //         }, 1000);
+  //       }
+  //     } catch (error) {
+  //       setStatus(error.response?.data?.message || 'Verification failed');
+  //     }
+  //   };
+
+  //   verifyEmailToken();
+  // }, [token, navigate]);
+  // console.log(token);
   useEffect(() => {
     const verifyEmailToken = async () => {
       try {
+        console.log('Making request to:', `/auth/verify-email/${token}`);
+        console.log('Token:', token);
+        
         const { data } = await axios.post(`/auth/verify-email/${token}`);
+        console.log('Response data:', data);
+        
         if (data.success) {
           setStatus('Email verified successfully!');
           const timer = setInterval(() => {
             setCountdown((prevCountdown) => {
               if (prevCountdown <= 1) {
                 clearInterval(timer);
-                navigate('/signin');
+                navigate('/auth/signin');
                 return 0;
               }
               return prevCountdown - 1;
             });
           }, 1000);
+        } else {
+          setStatus('Verification failed');
         }
       } catch (error) {
+        console.error('Full error:', error);
+        console.error('Error response:', error.response);
         setStatus(error.response?.data?.message || 'Verification failed');
       }
     };
-
-    verifyEmailToken();
-  }, [token, navigate]);
-  console.log(token);
   
+    if (token) {
+      verifyEmailToken();
+    }
+  }, [token, navigate]);
 
   return (
     <div className="flex flex-col items-center justify-start h-screen py-20">
