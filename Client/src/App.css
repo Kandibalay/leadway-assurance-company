@@ -89,6 +89,13 @@ body {
   justify-content: center;
   align-items: center;
 }
+.forgot-password {
+  background-image: url("./assets/images/login bg.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  justify-content: center;
+  align-items: center;
+}
 
 @media (max-width: 768px) {
   .asset {
