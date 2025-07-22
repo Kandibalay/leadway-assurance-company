@@ -7,17 +7,19 @@ import Download from '../../components/home/Download'
 import Companies from '../../components/home/Companies'
 
 
-
 const MarineCargo = () => {
+ 
+  
+
   return (
-    <>
+    <div>
       <Hero/>
       <Offer/>
       <Achievement/>
       <Plans/>
       <Download />
       <Companies />
-    </>
+    </div>
   )
 }
 

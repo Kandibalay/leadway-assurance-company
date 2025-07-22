@@ -251,8 +251,8 @@ const SignUp = () => {
       await signup(data);
       
       // Show success toast first
-      toast.success('Account created successfully! Welcome aboard! 🎉', {
-        duration: 3000,
+      toast.success('Account created successfully! Welcome aboard! 🎉. Please Check your email for verification', {
+        duration: 5000,
         position: 'top-center',
       });
       

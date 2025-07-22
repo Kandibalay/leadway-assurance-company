@@ -51,7 +51,7 @@ const testimonials = [
 
 const TestimonialCard = ({ testimonial }) => {
   return (
-    <div className="flex flex-col items-center text-center px-6 py-4">
+    <div className="flex flex-col items-center text-center px-6  py-4">
       <div className="flex justify-center mb-3">
         {[...Array(5)].map((_, i) => (
           <FaStar
@@ -113,11 +113,11 @@ const Testimonials = () => {
             // index 2 is the middle card when showing 5
             let cardClass = "";
             if (index === 2) {
-              cardClass = "shadow-2xl scale-110 z-10";
+              cardClass = " scale-120 z-10";
             } else if (index === 1 || index === 3) {
-              cardClass = "shadow-lg scale-100 opacity-80 z-0";
+              cardClass = " scale-100 opacity-80 z-0";
             } else {
-              cardClass = "shadow-md scale-95 opacity-50 blur-[1px] z-0";
+              cardClass = " scale-95 opacity-50 blur-[1px] z-0";
             }
         return (
               <div
@@ -139,7 +139,7 @@ const Testimonials = () => {
       </div>
 
     {/* Pagination with arrows */}
-    <div className="flex justify-center items-center mt-6 space-x-4">
+    <div className="flex justify-between w-[80%]  max-w-xl mx-auto px-6 items-center mt-10 space-x-4">
       <button
         onClick={prevSlide}
         className="bg-orange-500 text-white p-2 rounded-full hover:bg-orange-600"
@@ -154,7 +154,7 @@ const Testimonials = () => {
           return (
             <div
               key={idx}
-              className={`w-4 h-4 rounded-full flex items-center justify-center cursor-pointer transition-all
+              className={`w-2 h-2 rounded-full flex items-center justify-center cursor-pointer transition-all
                 ${isMiddle ? "bg-orange-500 font-bold scale-125 text-white shadow-lg" : "bg-gray-300 text-gray-400"}
               `}
               style={{
@@ -165,7 +165,7 @@ const Testimonials = () => {
               onClick={() => setCurrent((current + idx) % testimonials.length)}
             >
               {/* Use a dot or leave empty for just a circle */}
-              {isMiddle ? <span className="block w-2 h-2 rounded-full bg-white" /> : ""}
+              {isMiddle ? <span className="block w-2 h-2 rounded-full bg-orange-500" /> : ""}
             </div>
           );
         })}
