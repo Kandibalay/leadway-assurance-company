@@ -100,7 +100,7 @@ export const verifyEmail = async (req, res) => {
       html: welcomeEmail,
     });
 
-    // res.redirect(`${process.env.CLIENT_URL}/email-verified`);
+    res.redirect(`${process.env.CLIENT_URL}/email-verified`);
     res.status(200).json({
       success: true,
       message: "Email verified succesfully"
