@@ -2,8 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import MarineQuoteModal from "../modals/marineQuoteModal";
 
-
-
 const Hero = () => {
   return (
     <div className="marine-cargo py-10 px-6 md:px-10 lg:px-14 h-[450px]">
@@ -20,7 +18,7 @@ const Hero = () => {
           </NavLink>
         </NavLink>
         <div className="my-5">
-          <MarineQuoteModal/>
+          <MarineQuoteModal />
         </div>
       </div>
     </div>
