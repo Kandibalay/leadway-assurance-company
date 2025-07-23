@@ -48,6 +48,26 @@ body {
   align-items: center;
   text-align: center;
 }
+.cargoModal1{
+  background-image: url("./assets/images/MarineCargoModalbg1.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.cargoModal2{
+  background-image: url("./assets/images/MarineCargoGetSuccessModal.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 .marine-cargo{
   background-image: url("./assets/images/marineProductBg.png");
   background-size: cover;
@@ -96,6 +116,17 @@ body {
   justify-content: center;
   align-items: center;
 }
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
 
 @media (max-width: 768px) {
   .asset {
