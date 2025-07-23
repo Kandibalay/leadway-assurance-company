@@ -9,7 +9,7 @@ const Hero = () => {
         <h1 className='text-[40px] w-[95%] lg:w-full lg:text-[50px] leading-[1.2] lg:leading-none'>Insurance that puts you first.</h1>
         <p className='text-[18px] w-[80%] lg:w-full lg:text-[25px] font-medium'>Confidence in every claim. Support at every step.</p>
         <div className=' flex flex-col lg:flex-row gap-4 mt-8 w-full md:w-1/2 lg:w-[25%] xl:w-[20%] '>
-        <Link to="getQuote"> <button type="button" className='bg-[#EC5B0C] hover:bg-orange-700 rounded-md mx-auto lg:mx-0 py-3 w-1/2 font-semibold '>Get Quote</button></Link>
+         <button type="button" className='bg-[#EC5B0C] hover:bg-orange-700 rounded-md mx-auto lg:mx-0 py-3 w-1/2 font-semibold '><Link to="get-quote">Get Quote</Link></button>
             <button type="button" className='hidden lg:block border  rounded-md mx-auto lg:mx-0 py-3 w-1/2 font-semibold hover:text-[#EC5B0C] hover:border-[#EC5B0C]'>Explore Plans</button>
         </div>
     </div>

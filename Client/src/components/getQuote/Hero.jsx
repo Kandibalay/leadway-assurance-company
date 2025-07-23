@@ -1,5 +1,6 @@
 import React from 'react';
 import bgImage from "../../assets/images/HeroGetqoute.jpg"; 
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
@@ -29,9 +30,9 @@ const Hero = () => {
       <div className="text-center relative z-10">
         <h1 className="text-4xl font-bold">Our Products</h1>
         <p className="mt-2 text-lg">
-          <span className="text-[#ADADAD]">Home</span>
+          <Link to="/" className="text-white">Home</Link>
           <span className="mx-2">{'>'}</span>
-          <span className="text-white">Get Quote</span>
+          <span className="text-[#ADADAD]">Get Quote</span>
         </p>
       </div>
     </section>
