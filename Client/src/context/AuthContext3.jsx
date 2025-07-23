@@ -189,8 +189,17 @@ const forgotPassword = async (email) => {
 
 const resetPassword = async (resetToken, passwords) => {
   try {
-    const { data } = await axios.put(`/auth/reset-password/${resetToken}`, passwords);
-    return data;
+    // POST and use 'token' parameter name to match backend
+    const { data } = await axios.post(`/auth/reset-password/${resetToken}`, {
+      newPassword: passwords.password // Backend expects 'newPassword'
+    });
+    
+    //  backend returns { message: "Password reset successful" } on success
+    if (data?.message) {
+      return { success: true, message: data.message };
+    } else {
+      throw new Error('Reset failed');
+    }
   } catch (error) {
     throw new Error(error?.response?.data?.errMsg || error?.response?.data?.message || 'Reset failed');
   }
