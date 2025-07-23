@@ -10,6 +10,8 @@ import { Link } from 'react-router-dom';
 const ResetPassword = () => {
     const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [success, setSuccess] = useState(false);
   const searchParams = useSearchParams();
   const { resetPassword } = useAuth();
@@ -20,6 +22,14 @@ const ResetPassword = () => {
     formState: { errors },
     watch,
   } = useForm();
+
+  const togglePasswordVisibilityOne = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const togglePasswordVisibilityTwo = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
 
   const onSubmit = async (data) => {
     try {
