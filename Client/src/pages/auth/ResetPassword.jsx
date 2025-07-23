@@ -1,6 +1,8 @@
 import React from 'react'
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { BiHide } from "react-icons/bi";
+import { BiShow } from "react-icons/bi";
 import logo from '../../assets/icons/Logo.svg';
 import { useSearchParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext3'; // adjust the import path as needed
