@@ -73,7 +73,7 @@ const VerifyEmail = () => {
 
   return (
     <div className="forgot-password w-full min-h-screen h-full flex items-center justify-center bg-[#FFF6F2]">
-     <div className="w-[90%] max-w-lg bg-white my-6 py-6 px-4 md:py-12 md:px-16 rounded-3xl">
+     <div className="w-[90%] max-w-lg bg-white text-black my-6 py-6 px-4 md:py-12 md:px-16 rounded-3xl">
      <div className="space-y-4">
         <Link to='/' className="flex justify-center mb-6">
         <img src={logo} alt="" className='w-[100px]' />

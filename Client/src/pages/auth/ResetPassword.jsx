@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import logo from '../../assets/icons/Logo.svg';
 import { useSearchParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext3'; // adjust the import path as needed
+import { Link } from 'react-router-dom';
 
 
 const ResetPassword = () => {
@@ -48,16 +49,16 @@ const ResetPassword = () => {
       <div className="signin w-full min-h-screen h-full flex items-center justify-center bg-[#FFF6F2]">
         <div className="w-[90%] max-w-lg bg-white my-6 py-6 px-4 md:py-12 md:px-16 rounded-3xl">
           <div className='space-y-4'>
-             <NavLink to="/" className="flex justify-center mb-6">
+             <Link to="/" className="flex justify-center mb-6">
                         <img src={logo} alt="Logo" className='w-[100px]' />
-                        </NavLink>
+              </Link>
             <h2 className="text-xl text-black font-bold mb-2">Password Reset Successful</h2>
             <p className="text-black mb-4 text-sm">
               Your password has been successfully reset. You can now login with your new password.
             </p>
-            <NavLink href="/auth/signin" className="text-black underline flex items-center justify-center mt-4 text-sm">
+            <Link to="/auth/signin" className="text-black underline flex items-center justify-center mt-4 text-sm">
               Go to Login
-            </NavLink>
+            </Link>
           </div>
         </div>
       </div>
@@ -68,9 +69,9 @@ const ResetPassword = () => {
 <div className="forgot-password w-full min-h-screen h-full flex items-center justify-center bg-[#FFF6F2]">
       <div className="w-[90%] max-w-lg bg-white my-6 py-6 px-4 md:py-12 md:px-16 rounded-3xl">
         <div className="space-y-4">
-        <NavLink to="/" className="flex justify-center mb-6">
+        <Link to="/" className="flex justify-center mb-6">
             <img src={logo} alt="Logo" className='w-[100px]' />
-            </NavLink>
+            </Link>
           <h2 className="text-xl text-black font-bold mb-2">Reset Password</h2>
 
           {apiError && (
@@ -144,13 +145,13 @@ const ResetPassword = () => {
                                 id="confirmPassword"
                                 className="w-full border-b border-b-[#ADADAD] py-1 focus:outline-none text-[14px]"
                                 placeholder="Confirm Password"
-                                disabled={isLoading}
+                                
                               />
                               <button
                                 type="button"
                                 className="absolute right-3 top-3"
                                 onClick={togglePasswordVisibilityTwo}
-                                disabled={isLoading}
+                                
                               >
                                 {showConfirmPassword ? (
                                   <BiShow className="text-[#8C8C8C]" />
