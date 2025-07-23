@@ -923,7 +923,7 @@ export default function Navbar() {
               <NavLink to="/auth/signup">Sign Up</NavLink>
               </button>
               <button className="w-full border border-[#EA5B0C] text-[#EA5B0C] rounded-lg py-2.5 font-medium duration-200 transition-transform transform hover:scale-110">
-              <NavLink to="/auth/login">Login</NavLink>
+              <NavLink to="/auth/signin">Login</NavLink>
               </button>
             </div>
           </div>
@@ -1058,7 +1058,7 @@ export default function Navbar() {
                 onClick={closeMobileMenu}
                 className="w-full border border-[#EA5B0C] text-[#EA5B0C] rounded-lg py-2 font-medium duration-200 transition-transform transform hover:scale-110"
               >
-                 <NavLink to="/auth/login">Login</NavLink>
+                 <NavLink to="/auth/signin">Login</NavLink>
               </button>
             </div>
           </div>
