@@ -16,7 +16,7 @@ import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext3"; // adjust as needed
 import "./index.css";
-import { ModalProvider } from "./context/modalContext";
+import { ModalProvider } from "./context/ModalContext2"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

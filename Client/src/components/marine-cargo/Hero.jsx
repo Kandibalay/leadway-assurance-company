@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import MarineQuoteModal from "../modals/marineQuoteModal";
+import MarineQuoteModal from "../modals/MarineQuoteModal2";
 
 const Hero = () => {
   return (
