@@ -40,7 +40,7 @@ const VerifyEmail = () => {
         console.log('Making request to:', `/auth/verify-email/${token}`);
         console.log('Token:', token);
         
-        const { data } = await axios.get(`/auth/verify-email/${token}`);
+        const { data } = await axios.post(`/auth/verify-email/${token}`);
         console.log('Response data:', data);
         
         if (data.success) {
