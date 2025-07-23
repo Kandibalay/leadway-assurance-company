@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-// import MarineQuoteModal from "../modals/marineQuoteModal";
+import MarineQuoteModal from "../modals/MarineQuoteModal2";
 
 const Hero = () => {
   return (
@@ -18,7 +18,7 @@ const Hero = () => {
           </NavLink>
         </NavLink>
         <div className="my-5">
-          {/* <MarineQuoteModal /> */}
+          <MarineQuoteModal />
         </div>
       </div>
     </div>

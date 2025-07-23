@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import logo from '../../assets/icons/Logo.svg';
 import { useAuth } from '../../context/AuthContext3'; // adjust the import path as needed
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const ForgotPassword = () => {
@@ -38,9 +38,9 @@ const ForgotPassword = () => {
     <div className="forgot-password w-full min-h-screen h-full flex items-center justify-center bg-[#FFF6F2]">
       <div className="w-[90%] max-w-lg bg-white my-6 py-6 px-4 md:py-12 md:px-16 rounded-3xl">
         <div className="space-y-4">
-            <NavLink to="/" className="flex justify-center mb-6">
+            <Link to="/" className="flex justify-center mb-6">
             <img src={logo} alt="Logo" className='w-[100px]' />
-            </NavLink>
+            </Link>
         
           <h2 className="text-xl lg:text-xl font-bold mb-6 text-black">
             Forgot Password
@@ -86,7 +86,7 @@ const ForgotPassword = () => {
               {loading ? 'Sending...' : 'Reset Password'}
             </button>
           </form>
-          <NavLink to="/auth/signin" className="text-black underline flex items-center justify-center mt-4 text-sm">Back to Login</NavLink>
+          <Link to="/auth/signin" className="text-black underline flex items-center justify-center mt-4 text-sm">Back to Login</Link>
         </div>
       </div>
     </div>
