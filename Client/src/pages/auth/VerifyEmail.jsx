@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate,Link } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../../assets/icons/Logo.svg';
-import { Link } from 'react-router-dom';
 
 
 const VerifyEmail = () => {
