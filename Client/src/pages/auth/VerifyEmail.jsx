@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate,Link } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../../assets/icons/Logo.svg';
+import { Link } from 'react-router-dom';
+
 
 const VerifyEmail = () => {
   const { token } = useParams(); // Get the token from the URL
@@ -74,9 +76,9 @@ const VerifyEmail = () => {
     <div className="forgot-password w-full min-h-screen h-full flex items-center justify-center bg-[#FFF6F2]">
      <div className="w-[90%] max-w-lg bg-white my-6 py-6 px-4 md:py-12 md:px-16 rounded-3xl">
      <div className="space-y-4">
-        <NavLink to='/' className="flex justify-center mb-6">
+        <Link to='/' className="flex justify-center mb-6">
         <img src={logo} alt="" className='w-[100px]' />
-        </NavLink>
+        </Link>
         <h1 className="text-2xl font-semibold mb-4">{status}</h1>
         {status === 'Email verified successfully!' && (
           <p className="text-lg">
