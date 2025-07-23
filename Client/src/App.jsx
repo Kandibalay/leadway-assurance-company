@@ -102,7 +102,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/carousel" element={<CardCarousel />} />
-        <Route path="/GetQuote" element={<GetQuote />} />
+        <Route path="/get-quote" element={<GetQuote />} />
 
         {/* Public Auth Routes */}
         <Route path="/auth/signup" element={<SignUp />} />

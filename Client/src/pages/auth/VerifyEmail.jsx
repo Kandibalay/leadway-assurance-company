@@ -71,12 +71,12 @@ const VerifyEmail = () => {
   }, [token, navigate]);
 
   return (
-    <div className="flex flex-col items-center justify-start h-screen py-20">
-      <div className="bg-white p-6 flex flex-col items-center  max-w-md w-full text-center gap-4">
-        <Link to='/'>
-        
+    <div className="forgot-password w-full min-h-screen h-full flex items-center justify-center bg-[#FFF6F2]">
+     <div className="w-[90%] max-w-lg bg-white my-6 py-6 px-4 md:py-12 md:px-16 rounded-3xl">
+     <div className="space-y-4">
+        <NavLink to='/' className="flex justify-center mb-6">
         <img src={logo} alt="" className='w-[100px]' />
-        </Link>
+        </NavLink>
         <h1 className="text-2xl font-semibold mb-4">{status}</h1>
         {status === 'Email verified successfully!' && (
           <p className="text-lg">
@@ -85,6 +85,7 @@ const VerifyEmail = () => {
           </p>
         )}
       </div>
+     </div>
     </div>
   );
 };

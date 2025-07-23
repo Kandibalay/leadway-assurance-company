@@ -112,7 +112,7 @@ const Login = () => {
                 </div>
                 <div className='flex items-center justify-between mb-1 text-white bg-wite'>
                    <div className='flex items-center'>
-                    <input {...register("remember", { required: true })}
+                    <input {...register("remember")}
                     className="w-3 lg:w-4 cursor-pointer h-3 lg:h-4 text-white bg-white" 
                     type='checkbox' name="remember" id="remember" /> 
                     <label htmlFor="remember" className="ml-2 text-[12px] lg:text-[14px] text-[#222222]">Remember me

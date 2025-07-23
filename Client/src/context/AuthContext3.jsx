@@ -50,7 +50,7 @@ const AuthProvider = ({ children }) => {
       if (!data?.error) {
         const newAuth = {
           user: data.user,
-          token: data.user.token,
+          token: data.token,
           success: data.success,
           message: data.message
         };
