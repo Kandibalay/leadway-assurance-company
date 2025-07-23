@@ -7,7 +7,7 @@ import { IoClose } from "react-icons/io5";
 import logo from "../assets/icons/Logo.svg";
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { useAuth } from "../context/AuthContext3";
-import { useModal } from "../context/modalContext";
+import { useModal } from "../context/ModalContext2";
 import Profile  from "../assets/icons/profile.svg"
 import Privacy from "../assets/icons/privacy.svg"
 import Help from "../assets/icons/helpcenter.svg"
