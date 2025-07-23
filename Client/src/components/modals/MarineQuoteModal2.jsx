@@ -40,7 +40,7 @@ const MarineQuoteModal = () => {
       {showFormModal && (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-80">
           <div className="bg-black/70 text-black w-full min-h-screen pointer-events-auto">
-           <div className="relative w-[90%] max-w-4xl text-black bg-white mx-auto p-12">
+           <div className="cargoModal1 bg-[url(/assets/images/MarineCargoModalbg1.png)] relative w-[90%] max-w-4xl text-black bg-white mx-auto p-12">
             <button
               onClick={() => setShowFormModal(false)}
               className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 border border-gray-700 rounded-md "
@@ -68,7 +68,7 @@ const MarineQuoteModal = () => {
                     {...register("fullName", {
                       required: "Full name is required",
                     })}
-                    className="w-full rounded-lg p-2 border text-sm border-gray-300  focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    className="w-full rounded-lg p-2 border text-sm border-gray-700  focus:outline-none focus:ring-2 focus:ring-orange-500"
                     placeholder="Enter your full name"
                   />
                 </div>
@@ -82,7 +82,7 @@ const MarineQuoteModal = () => {
                   <input
                     type="text"
                     {...register("CompanyName")}
-                    className="w-full p-2 border text-sm border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    className="w-full p-2 border text-sm border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                     placeholder="Let us Know Who You Represent"
                   />
                 </div> */}
@@ -93,7 +93,7 @@ const MarineQuoteModal = () => {
                   <input
                     type="email"
                     {...register("email", { required: "Email is required" })}
-                    className="w-full p-2 border text-sm border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    className="w-full p-2 border text-sm border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                     placeholder="We’ll get back to you here"
                   />
                 </div> */}
@@ -106,7 +106,7 @@ const MarineQuoteModal = () => {
                     {...register("phoneNumber", {
                       required: "Phone Number is required",
                     })}
-                    className="w-full p-2 border text-sm border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    className="w-full p-2 border text-sm border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                     placeholder="Our Experts Would Reach Out to You on this Number"
                   />
                 </div>
@@ -116,7 +116,7 @@ const MarineQuoteModal = () => {
                     </label>
                     <textarea
                         {...register("message")}
-                        className="w-full p-2 border text-sm border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        className="w-full p-2 border text-sm border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                         placeholder="Tell us how we can help"
                         rows="6"
                     ></textarea>
@@ -147,7 +147,7 @@ const MarineQuoteModal = () => {
       {showSuccessModal && (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-80">
           <div className="bg-black/70 text-black w-full min-h-screen pointer-events-auto">
-            <div  className="relative mt-10 lg:mt-28 w-[90%] max-w-4xl text-black bg-white rounded-lg mx-auto p-12 flex-flex-col items-center justify-center gap-4">
+            <div  className="cargoModal2 relative bg-[url(/assets/images/MarineCargoGetSuccessModal.png)] mt-10 lg:mt-28 w-[90%] max-w-4xl text-black bg-white rounded-lg mx-auto p-12 flex-flex-col items-center justify-center gap-4">
                 <h2 className="text-3xl font-semibold mb-2">Your Quote Request Has Been Received!</h2>
                 <p className="mb-4">Thank you for reaching out to Leadway Assurance. Our marine insurance specialists are reviewing your request and will contact you within 24 hours. In the meantime, feel free to explore more about our marine insurance services or other coverage options we offer.</p>
                 <button
