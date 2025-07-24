@@ -38,105 +38,127 @@ const MarineQuoteModal = () => {
 
       {/* Form Modal */}
       {showFormModal && (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-80">
-          <div className="bg-black/70 text-black w-full min-h-screen pointer-events-auto">
-           <div className="cargoModal1 bg-[url(/assets/images/MarineCargoModalbg1.png)] relative w-[90%] max-w-4xl text-black bg-white mx-auto p-12">
-            <button
-              onClick={() => setShowFormModal(false)}
-              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 border border-gray-700 rounded-md "
-            >
-              <IoIosClose size={40}  />
-            </button>
-            <div className="w-full max-w-xl mx-auto">
-              <h2 className="font-bold text-xl">
-                Request a Marine Cargo Insurance Quote
-              </h2>
-              <p className="text-center font-light mt-4">
-                Get tailored protection for your cargo in just a few steps. Fill
-                in your details and a representative will reach out shortly.
-              </p>
-              <form
-                onSubmit={handleSubmit(onSubmit)}
-                className="flex flex-col gap-5 items-start justify-start w-full mt-4 "
+        <div className="fixed top-0 left-0 w-full h-screen flex items-center justify-center z-80 overflow-hidden">
+          <div className="bg-black/70 text-black w-full h-screen flex items-center justify-center pointer-events-auto overflow-hidden">
+           <div className="cargoModal1 bg-[url(/assets/images/MarineCargoModalbg1.png)] relative w-[90%] max-w-4xl h-[90vh] text-black bg-white mx-auto flex flex-col overflow-hidden">
+            <div className="flex-shrink-0 p-4 relative">
+              <button
+                onClick={() => setShowFormModal(false)}
+                className="absolute top-2 right-0 text-gray-500 hover:text-gray-700 border border-gray-700 rounded-md "
               >
-                {/* <div className="w-full flex flex-col items-start">
-                  <label className="block mb-2 text-sm font-medium text-gray-700">
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    {...register("fullName", {
-                      required: "Full name is required",
-                    })}
-                    className="w-full rounded-lg p-2 border text-sm border-gray-700  focus:outline-none focus:ring-2 focus:ring-orange-500"
-                    placeholder="Enter your full name"
-                  />
-                </div>
-                <div className="w-full flex flex-col items-start">
-                  <label className="block mb-2 text-sm font-medium text-gray-700">
-                    Company Name{" "}
-                    <span className="text-sm text-gray-300 font-light">
-                      (optional)
-                    </span>
-                  </label>
-                  <input
-                    type="text"
-                    {...register("CompanyName")}
-                    className="w-full p-2 border text-sm border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                    placeholder="Let us Know Who You Represent"
-                  />
-                </div> */}
-                {/* <div className="w-full flex flex-col items-start">
-                  <label className="block mb-2 text-sm font-medium text-gray-700">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    {...register("email", { required: "Email is required" })}
-                    className="w-full p-2 border text-sm border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                    placeholder="We’ll get back to you here"
-                  />
-                </div> */}
-                <div className="w-full flex flex-col items-start">
-                  <label className="block mb-2 text-sm font-medium text-gray-700">
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    {...register("phoneNumber", {
-                      required: "Phone Number is required",
-                    })}
-                    className="w-full p-2 border text-sm border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                    placeholder="Our Experts Would Reach Out to You on this Number"
-                  />
-                </div>
-                <div className="w-full flex flex-col items-start">
+                <IoIosClose size={40}  />
+              </button>
+            </div>
+            
+            <div className="flex-1 overflow-y-auto p-8 pt-4">
+              <div className="w-full max-w-xl mx-auto">
+                <h2 className="font-bold text-xl">
+                  Request a Marine Cargo Insurance Quote
+                </h2>
+                <p className="text-center font-light mt-4">
+                  Get tailored protection for your cargo in just a few steps. Fill
+                  in your details and a representative will reach out shortly.
+                </p>
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="flex flex-col gap-5 items-start justify-start w-full mt-4"
+                >
+                  <div className="w-full flex flex-col items-start">
                     <label className="block mb-2 text-sm font-medium text-gray-700">
-                        Message
+                      Full Name
                     </label>
-                    <textarea
-                        {...register("message")}
-                        className="w-full p-2 border text-sm border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                        placeholder="Tell us how we can help"
-                        rows="6"
-                    ></textarea>
-                </div>
-                <div>
-                    <input type="checkbox" name="agreement" id="agreement" />
-                    <label htmlFor="agreement" className="ml-2 text-sm text-gray-600">
-                        I agree to Leadway's <span className="text-orange-500">Terms & Privacy Policy</span> and consent to being contacted for this Quote
+                    <input
+                      type="text"
+                      {...register("fullName", {
+                        required: "Full name is required",
+                      })}
+                      className="w-full rounded-lg p-2 border text-sm border-gray-700  focus:outline-none focus:ring-2 focus:ring-orange-500"
+                      placeholder="Enter your full name"
+                    />
+                    {errors.fullName && (
+                      <span className="text-red-500 text-sm mt-1">{errors.fullName.message}</span>
+                    )}
+                  </div>
+                  <div className="w-full flex flex-col items-start">
+                    <label className="block mb-2 text-sm font-medium text-gray-700">
+                      Company Name{" "}
+                      <span className="text-sm text-gray-300 font-light">
+                        (optional)
+                      </span>
                     </label>
-                </div>
+                    <input
+                      type="text"
+                      {...register("CompanyName")}
+                      className="w-full p-2 border text-sm border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                      placeholder="Let us Know Who You Represent"
+                    />
+                  </div>
+                  <div className="w-full flex flex-col items-start">
+                    <label className="block mb-2 text-sm font-medium text-gray-700">
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      {...register("email", { required: "Email is required" })}
+                      className="w-full p-2 border text-sm border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                      placeholder="We'll get back to you here"
+                    />
+                    {errors.email && (
+                      <span className="text-red-500 text-sm mt-1">{errors.email.message}</span>
+                    )}
+                  </div>
+                  <div className="w-full flex flex-col items-start">
+                    <label className="block mb-2 text-sm font-medium text-gray-700">
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      {...register("phoneNumber", {
+                        required: "Phone Number is required",
+                      })}
+                      className="w-full p-2 border text-sm border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                      placeholder="Our Experts Would Reach Out to You on this Number"
+                    />
+                    {errors.phoneNumber && (
+                      <span className="text-red-500 text-sm mt-1">{errors.phoneNumber.message}</span>
+                    )}
+                  </div>
+                  <div className="w-full flex flex-col items-start">
+                      <label className="block mb-2 text-sm font-medium text-gray-700">
+                          Message
+                      </label>
+                      <textarea
+                          {...register("message")}
+                          className="w-full p-2 border text-sm border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                          placeholder="Tell us how we can help"
+                          rows="6"
+                      ></textarea>
+                  </div>
+                  <div className="flex items-start">
+                      <input 
+                        type="checkbox" 
+                        {...register("agreement", { required: "You must agree to the terms" })}
+                        id="agreement" 
+                        className="mt-1"
+                      />
+                      <label htmlFor="agreement" className="ml-2 text-sm text-gray-600">
+                          I agree to Leadway's <span className="text-orange-500">Terms & Privacy Policy</span> and consent to being contacted for this Quote
+                      </label>
+                  </div>
+                  {errors.agreement && (
+                    <span className="text-red-500 text-sm">{errors.agreement.message}</span>
+                  )}
 
-                <div className="w-full">
-                  <button
-                    type="submit"
-                    className="bg-[#EA5B0C] hover:bg-orange-700 text-white px-4 py-3 rounded-lg w-full"
-                  >
-                    Submit
-                  </button>
-                </div>
-              </form>
+                  <div className="w-full pb-4">
+                    <button
+                      type="submit"
+                      className="bg-[#EA5B0C] hover:bg-orange-700 text-white px-4 py-3 rounded-lg w-full"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
             </div>
           </div>
