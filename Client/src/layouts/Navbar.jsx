@@ -198,7 +198,7 @@ export default function Navbar() {
                 </button>
                 
                 {isDesktopInsuranceDropdownOpen && (
-                  <div className="absolute grid grid-cols-3 left-0 mt-5 w-200 bg-white rounded-3xl px-12 shadow-lg py-6 z-50">
+                  <div className="absolute grid grid-cols-3 -left-24 mt-5 w-220 bg-white rounded-3xl px-12 shadow-lg py-6 z-50">
                     {/* Business Insurance */}
                     <div className="mb-4">
                       <h3 
@@ -363,9 +363,9 @@ export default function Navbar() {
                 <div className="hidden lg:block w-1/5 relative">
                   <div className="flex gap-[4px] justify-between items-center">
                     <div className="h-[51px] w-[51px] flex items-center justify-center text-lg text-[#006B14] text-center rounded-full bg-[#F0F7F6]">
-                      <h1>{getInitials(auth?.user?.fullName)}</h1>
+                      <h1> {auth?.user?.fullName?.split(" ").slice(0, 2).map(name => name[0]).join("").toUpperCase()}</h1>
                     </div>
-                    <div className="text-base text-[#3C3C3C]"><h3 className="flex text-[14px] font-medium">{`${auth?.user?.fullName}`}</h3></div>
+                    <div className="text-base text-[#3C3C3C]"><h3 className="flex text-[14px] font-medium"> {auth?.user?.fullName?.split(" ").slice(0, 2).join(" ")}</h3></div>
                     <div className="text-[#4F4F4F] text-2xl cursor-pointer" onClick={openMenu}><RiArrowDropDownLine /></div>
                   </div>
                   {dropOpen && (
@@ -410,7 +410,7 @@ export default function Navbar() {
       {/* Mobile menu */}
       {isMobileMenuOpen && (
         <div className="lg:hidden px-6 md:px-10 ">
-          <div className=" pt-2 pb-3 space-y-1 flex flex-col md:items-center sm:px-3 bg-white border-t border-gray-200">
+          <div className=" pt-2 pb-3 space-y-1 flex flex-col md:items-center sm:px-3 bg-white  border-t border-gray-200">
             <NavLink 
               to="/" 
               onClick={() => handlePageClick('home')}
@@ -513,7 +513,7 @@ export default function Navbar() {
               Contact Us
             </NavLink>
             {auth.user != null ? (
-                <div className="md:w-1/3 pt-4 space-y-2 hidden">
+                <div className="md:w-1/3 pt-4 space-y-2 lg:hidden">
                   <div className="flex gap-[4px] justify-between items-center">
                     <div className="h-[51px] w-[51px] flex items-center justify-center text-lg text-[#006B14] text-center rounded-full bg-[#F0F7F6]">
                       <h1>{getInitials(auth?.user?.fullName)}</h1>
@@ -522,14 +522,13 @@ export default function Navbar() {
                     <div className="text-[#4F4F4F] text-2xl cursor-pointer" onClick={openMenu}><RiArrowDropDownLine /></div>
                   </div>
                   {dropOpen && (
-                    <div className="w-[166px] py-[4px] absolute top-14 right-0 bg-white rounded-[10px] text-[#111014] text-[16px] drop-shadow shadow-[#00000026] cursor-pointer">
-                      <div><ul className="px-[10px] py-[10px] grid gap-[10px]">
-                        <li className="hover:text-[#006B14]">My Tickets</li>
-                        <li className="hover:text-[#006B14]" onClick={() => openModal('resetPassword')}>
-                          Reset Password
-                        </li>
-                        <li className="text-[#DB3E3E] hover:text-[#006B14]" onClick={() => openModal('logout', { onLogout: handleLogout })}>
-                          Log Out
+                    <div className="w-full py-[4px] absolute top-14 right-0 bg-white/90 backdrop-blur-xs rounded-[10px] text-[#111014] text-[16px] drop-shadow shadow-[#00000026] cursor-pointer">
+                      <div><ul className="px-3 py-6 grid gap-[10px] text-sm">
+                        <li className="flex items-center gap-2 border rounded-lg p-2 border-gray-300  hover:text-[#EA5B0C] hover:border-[#EA5B0C]"><span><img src={Profile} alt="" className="w-4"/></span>Profile Details</li>
+                        <li className="hover:text-[#EA5B0C] hover:border-[#EA5B0C]  flex items-center gap-2 border rounded-lg p-2 border-gray-300"><span><img src={Privacy} alt="" className="w-4"/></span>Privacy Policy</li>
+                        <li className="hover:text-[#EA5B0C] hover:border-[#EA5B0C] flex items-center gap-2 border rounded-lg p-2 border-gray-300"><span><img src={Help} alt="" className="w-4"/></span>Help Center</li>
+                        <li className="hover:text-[#EA5B0C] hover:border-[#EA5B0C]  flex items-center gap-2 border rounded-lg p-2 border-gray-300" onClick={() => openModal('logout', { onLogout: handleLogout })}>
+                        <span><img src={LogoutIcon} alt="" className="w-4"/></span> Log Out
                         </li>
                       </ul></div>
                     </div>

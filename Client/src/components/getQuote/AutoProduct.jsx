@@ -141,8 +141,8 @@ const Autoproduct = () => {
 
       {/* MOBILE VIEW */}
       <div className="text-black py-10 container mx-auto md:hidden block">
-        <div className="flex items-center justify-between mb-6 px-4">
-          <h1 className="text-black font-bold text-3xl">General Products</h1>
+        <div className="flex flex-col items-center justify-center mb-6 px-4">
+          <h1 className="text-black text-center font-bold text-3xl">Auto Products</h1>
           <button
             onClick={() => setShowAll(!showAll)}
             className="text-orange-500 font-semibold px-4 py-2 text-sm rounded hover:bg-orange-500 hover:text-white transition-all"
@@ -178,7 +178,7 @@ const Autoproduct = () => {
               {cardData.map((card, index) => (
                 <div
                   key={index}
-                  className="bg-white text-black rounded-lg overflow-hidden shadow-md flex-shrink-0 w-64"
+                  className="bg-white text-black rounded-lg overflow-hidden shadow-md flex-shrink-0 w-84"
                 >
                   <img
                     src={card.image}

@@ -4,7 +4,7 @@ import MarineQuoteModal from "../modals/MarineQuoteModal2";
 
 const Hero = () => {
   return (
-    <div className="marine-cargo py-10 px-6 md:px-10 lg:px-14 h-[450px]">
+    <div className="marine-cargo  lg:mt-16 px-6 md:px-10 lg:px-14 h-[450px]">
       <div className="container mx-auto">
         <h1 className="font-extrabold text-center py-1.5 text-[25px] lg:text-[45px]">
           Marine Cargo
