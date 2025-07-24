@@ -322,14 +322,7 @@ const SignUp = () => {
             </h1>
             <div className="text-left text-gray-600 mb-4">
               <input
-                {...register("fullName", {
-                  required: "This Field is required",
-                  pattern: {
-                    value:
-                      /^[a-zA-Z]+(?:(?:|['_\. ])([a-zA-Z]*(\.\s)?[a-zA-Z])+)*$/,
-                    message: "Please enter a valid name",
-                  },
-                })}
+                {...register("fullName", { required: "This Field is required" })}
                 type="text"
                 id="fullName"
                 className="w-full border-b border-b-[#ADADAD] py-1 focus:outline-none text-[14px]"
