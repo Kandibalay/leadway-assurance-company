@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 export default function Hero({ title, img, text, page }) {
   return (
     <section
-      className="w-full relative h-[450px] px-4 text-white text-center bg-cover bg-center flex items-center justify-center"
+      className="w-full relative lg:mt-16 h-[450px] px-4 text-white text-center bg-cover bg-center flex items-center justify-center"
       style={{ backgroundImage: `url("/${img}")` }}
     >
       {/* Overlay */}

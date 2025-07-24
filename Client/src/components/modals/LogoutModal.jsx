@@ -17,7 +17,7 @@ export default function LogoutModal({ onClose, onLogout }) {
         <button onClick={onClose} className="bg-[#ffffff] text-[#18A532] py-2 w-full border border-[#18A532] rounded-md">
           Cancel
         </button>
-        <button onClick={() => { onLogout(); onClose(); }} className="bg-[#18A532] text-white py-2 w-full rounded-md">
+        <button onClick={() => { onLogout(); onClose(); }} className="bg-red-600 text-white py-2 w-full rounded-md">
           Log Out
         </button>
       </div>
